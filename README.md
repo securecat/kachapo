@@ -1,10 +1,10 @@
-# kachapo
+# Kachapo
 
-kachapo is a Chrome extension that visualizes the sounds of your interactions on any webpage.
+Kachapo is a Chrome extension that visualizes the sounds of your interactions on any webpage.
 
 ## Overview
 
-Your clicks, drag-selections, and keystrokes in input fields are all accompanied by onomatopoeia that pops up on screen. Inspired by "Miruoto," an ethical creative project by Hogaku Inc. (founded by Reiko Katayama). That said, unlike Miruoto, kachapo solves absolutely no social problems — it's just a joke app.
+Your clicks, drag-selections, and keystrokes in input fields are all accompanied by onomatopoeia that pops up on screen. Inspired by "Miruoto," an ethical creative project by Hogaku Inc. (founded by Reiko Katayama). That said, unlike Miruoto, Kachapo solves absolutely no social problems — it's just a joke app.
 
 ## Features
 
@@ -15,7 +15,7 @@ Your clicks, drag-selections, and keystrokes in input fields are all accompanied
 
 ## Notes
 
-kachapo may not work on sites with strict CSP (Content Security Policy) or heavy SPA frameworks. Consider it best-effort fun.
+Kachapo may not work on sites with strict CSP (Content Security Policy) or heavy SPA frameworks. Consider it best-effort fun.
 
 ## Installation
 
@@ -25,17 +25,20 @@ Or clone this repository and load it as an unpacked extension in Chrome's Develo
 
 ## Changelog
 
-### v1.0.1 (2026-05-19)
+### v1.0.2
+- Dark mode support for the popup UI
+
+### v1.0.1
 - Improved popup accessibility (WCAG 2.2 AA)
 - Improved semantic HTML structure
 - Added README.md
 
-### v1.0.0 (2026-05-19)
+### v1.0.0
 - Initial release
 
 ---
 
-# kachapo
+# カチャポ
 
 カチャポは、ウェブページ上での操作音を可視化するChrome拡張です。
 
@@ -62,10 +65,13 @@ Chrome ウェブストアからインストール（準備中）
 
 ## 更新履歴
 
-### v1.0.1 (2026-05-19)
+### v1.0.2
+- ポップアップのダークモード対応
+
+### v1.0.1
 - ポップアップのアクセシビリティ改善（WCAG 2.2 AA 対応）
 - セマンティックHTMLへの改善
 - README.md を追加
 
-### v1.0.0 (2026-05-19)
+### v1.0.0
 - 初回リリース
