@@ -11,10 +11,8 @@
         --surface:   #ffffff;
         --ui-border: #767676;
         --text:      #18181b;
-        --muted:     #646470;
         --accent:    #7C3AED;
         --accent-l:  #ede9fe;
-        --success:   #15803d;
         --radius:    8px;
         --font:      'Hiragino Kaku Gothic Pro', 'Meiryo', 'Noto Sans JP', system-ui, sans-serif;
       }
@@ -31,9 +29,6 @@
 
       header {
         padding: 16px 16px 14px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
       }
 
       h1.logo {
@@ -43,15 +38,6 @@
         color: var(--accent);
       }
       h1.logo span { color: var(--text); }
-
-      .saved {
-        margin-left: auto;
-        color: var(--success);
-        opacity: 0;
-        transition: opacity .2s;
-        pointer-events: none;
-      }
-      .saved.show { opacity: 1; }
 
       fieldset {
         padding: 14px 16px;
@@ -76,7 +62,7 @@
 
       .radio-label {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         gap: 10px;
         padding: 6px 8px;
         border-radius: var(--radius);
@@ -93,7 +79,6 @@
         min-width: 16px;
         border: 2px solid var(--ui-border);
         border-radius: 50%;
-        margin-top: 4px;
         cursor: pointer;
         transition: border-color .12s, background .12s;
       }
@@ -107,15 +92,17 @@
         outline-offset: 2px;
       }
 
-      .radio-text { flex: 1; }
-      .radio-main { display: block; color: var(--text); }
-      .radio-label input:checked ~ .radio-text .radio-main {
+      .radio-main { color: var(--text); }
+      .radio-label input:checked ~ .radio-main {
         color: var(--accent);
         font-weight: 600;
       }
-      .radio-sub {
-        display: block;
-        color: var(--muted);
+
+      @keyframes kp-popup {
+        0%   { opacity: 0; transform: scale(0.4) rotate(var(--rot)); }
+        15%  { opacity: 1; transform: scale(1.3) rotate(var(--rot)); }
+        55%  { opacity: 1; transform: scale(1.0) rotate(var(--rot)); }
+        100% { opacity: 0; transform: scale(0.85) translateY(-22px) rotate(var(--rot)); }
       }
 
       @media (prefers-color-scheme: dark) {
@@ -124,10 +111,8 @@
           --surface:   #27272a;
           --ui-border: #6e6e76;
           --text:      #fafafa;
-          --muted:     #a1a1aa;
           --accent:    #a78bfa;
           --accent-l:  #2d1b69;
-          --success:   #22c55e;
         }
       }
     </style>
@@ -136,7 +121,6 @@
 
     <header>
       <h1 class="logo">ka<span>cha</span>po</h1>
-      <span class="saved" id="saved" role="status">Saved ✓</span>
     </header>
 
     <fieldset>
@@ -144,38 +128,29 @@
       <div class="radio-group">
         <label class="radio-label">
           <input type="radio" name="lang" value="en">
-          <span class="radio-text"><span class="radio-main">English</span></span>
+          <span class="radio-main">English</span>
         </label>
         <label class="radio-label">
           <input type="radio" name="lang" value="ja">
-          <span class="radio-text"><span class="radio-main">Japanese</span></span>
+          <span class="radio-main">Japanese</span>
         </label>
       </div>
     </fieldset>
 
     <fieldset>
-      <legend>Color</legend>
+      <legend>Kachapo color</legend>
       <div class="radio-group">
         <label class="radio-label">
           <input type="radio" name="color" value="light">
-          <span class="radio-text">
-            <span class="radio-main">Light theme</span>
-            <span class="radio-sub">Black stroke on onomatopoeia</span>
-          </span>
+          <span class="radio-main">Light</span>
         </label>
         <label class="radio-label">
           <input type="radio" name="color" value="dark">
-          <span class="radio-text">
-            <span class="radio-main">Dark theme</span>
-            <span class="radio-sub">White stroke on onomatopoeia</span>
-          </span>
+          <span class="radio-main">Dark</span>
         </label>
         <label class="radio-label">
           <input type="radio" name="color" value="device">
-          <span class="radio-text">
-            <span class="radio-main">Device default</span>
-            <span class="radio-sub">Follows prefers-color-scheme</span>
-          </span>
+          <span class="radio-main">Device default</span>
         </label>
       </div>
     </fieldset>
