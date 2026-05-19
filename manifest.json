@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "kachapo",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Onomatopoeia pops up on every click, drag-select, and keystroke.",
   "icons": {
     "16": "icons/icon16.png",

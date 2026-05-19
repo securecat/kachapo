@@ -25,6 +25,9 @@ Or clone this repository and load it as an unpacked extension in Chrome's Develo
 
 ## Changelog
 
+### v1.0.7
+- Reduce popup width from 300px to 250px
+
 ### v1.0.6
 - Rename "Kachapo color" section to "Text stroke"
 - Update color labels to "Black" and "White"
@@ -81,6 +84,9 @@ Chrome ウェブストアからインストール（準備中）
 または、このリポジトリをクローンして、Chromeの「デベロッパーモード」でパックされていない拡張機能として読み込んでください。
 
 ## 更新履歴
+
+### v1.0.7
+- ポップアップの横幅を 300px から 250px に縮小
 
 ### v1.0.6
 - 「Kachapo color」セクションを「Text stroke」に改称
