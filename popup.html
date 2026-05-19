@@ -7,38 +7,37 @@
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
       :root {
-        --bg:       #fafafa;
-        --surface:  #ffffff;
-        --border:   #e4e4e7;
-        --text:     #18181b;
-        --muted:    #646470;
-        --accent:   #7C3AED;
-        --accent-l: #ede9fe;
-        --success:  #15803d;
-        --radius:   8px;
-        --font:     'Hiragino Kaku Gothic Pro', 'Meiryo', 'Noto Sans JP', system-ui, sans-serif;
+        --bg:        #fafafa;
+        --surface:   #ffffff;
+        --ui-border: #767676;
+        --text:      #18181b;
+        --muted:     #646470;
+        --accent:    #7C3AED;
+        --accent-l:  #ede9fe;
+        --success:   #15803d;
+        --radius:    8px;
+        --font:      'Hiragino Kaku Gothic Pro', 'Meiryo', 'Noto Sans JP', system-ui, sans-serif;
       }
 
       body {
-        width: 260px;
+        width: 300px;
         background: var(--bg);
         color: var(--text);
         font-family: var(--font);
-        font-size: 13px;
+        font-size: 16px;
         line-height: 1.5;
-        padding: 0 0 4px;
+        padding: 0 0 8px;
       }
 
       header {
-        padding: 14px 16px 12px;
-        border-bottom: 1px solid var(--border);
+        padding: 16px 16px 14px;
         display: flex;
         align-items: center;
         gap: 8px;
       }
 
       h1.logo {
-        font-size: 18px;
+        font-size: 20px;
         font-weight: 800;
         letter-spacing: -0.02em;
         color: var(--accent);
@@ -47,7 +46,6 @@
 
       .saved {
         margin-left: auto;
-        font-size: 11px;
         color: var(--success);
         opacity: 0;
         transition: opacity .2s;
@@ -56,21 +54,17 @@
       .saved.show { opacity: 1; }
 
       fieldset {
-        padding: 12px 16px;
+        padding: 14px 16px;
         border: none;
-        border-bottom: 1px solid var(--border);
       }
-      fieldset:last-of-type { border-bottom: none; }
 
       legend {
         float: left;
         width: 100%;
-        padding-bottom: 8px;
-        font-size: 10px;
+        padding-bottom: 10px;
+        font-size: 16px;
         font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--muted);
+        color: var(--text);
       }
 
       .radio-group {
@@ -83,8 +77,8 @@
       .radio-label {
         display: flex;
         align-items: flex-start;
-        gap: 9px;
-        padding: 5px 8px;
+        gap: 10px;
+        padding: 6px 8px;
         border-radius: var(--radius);
         cursor: pointer;
         transition: background .12s;
@@ -94,19 +88,19 @@
       .radio-label input[type=radio] {
         appearance: none;
         -webkit-appearance: none;
-        width: 14px;
-        height: 14px;
-        min-width: 14px;
-        border: 2px solid var(--border);
+        width: 16px;
+        height: 16px;
+        min-width: 16px;
+        border: 2px solid var(--ui-border);
         border-radius: 50%;
-        margin-top: 1px;
+        margin-top: 4px;
         cursor: pointer;
         transition: border-color .12s, background .12s;
       }
       .radio-label input[type=radio]:checked {
         border-color: var(--accent);
         background: var(--accent);
-        box-shadow: inset 0 0 0 2px var(--surface);
+        box-shadow: inset 0 0 0 3px var(--surface);
       }
       .radio-label input[type=radio]:focus-visible {
         outline: 2px solid var(--accent);
@@ -114,27 +108,26 @@
       }
 
       .radio-text { flex: 1; }
-      .radio-main { display: block; color: var(--text); font-size: 13px; }
+      .radio-main { display: block; color: var(--text); }
       .radio-label input:checked ~ .radio-text .radio-main {
         color: var(--accent);
         font-weight: 600;
       }
       .radio-sub {
         display: block;
-        font-size: 10.5px;
         color: var(--muted);
       }
 
       @media (prefers-color-scheme: dark) {
         :root {
-          --bg:       #18181b;
-          --surface:  #27272a;
-          --border:   #3f3f46;
-          --text:     #fafafa;
-          --muted:    #a1a1aa;
-          --accent:   #a78bfa;
-          --accent-l: #2d1b69;
-          --success:  #22c55e;
+          --bg:        #18181b;
+          --surface:   #27272a;
+          --ui-border: #6e6e76;
+          --text:      #fafafa;
+          --muted:     #a1a1aa;
+          --accent:    #a78bfa;
+          --accent-l:  #2d1b69;
+          --success:   #22c55e;
         }
       }
     </style>

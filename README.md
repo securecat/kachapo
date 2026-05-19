@@ -25,6 +25,10 @@ Or clone this repository and load it as an unpacked extension in Chrome's Develo
 
 ## Changelog
 
+### v1.0.3
+- Fixed radio button contrast in non-selected state
+- Various design adjustments
+
 ### v1.0.2
 - Dark mode support for the popup UI
 
@@ -64,6 +68,10 @@ Chrome ウェブストアからインストール（準備中）
 または、このリポジトリをクローンして、Chromeの「デベロッパーモード」でパックされていない拡張機能として読み込んでください。
 
 ## 更新履歴
+
+### v1.0.3
+- ラジオボタン非選択時のコントラスト修正
+- その他デザイン調整
 
 ### v1.0.2
 - ポップアップのダークモード対応
