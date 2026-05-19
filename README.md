@@ -25,6 +25,11 @@ Or clone this repository and load it as an unpacked extension in Chrome's Develo
 
 ## Changelog
 
+### v1.0.5
+- Fix Kachapo color setting not applying to onomatopoeia stroke color
+- Update Kachapo color labels to "黒で縁取り" and "白で縁取り"
+- Remove "Device default" color option
+
 ### v1.0.4
 - Replace auto-hiding "Saved" indicator with kachapo-style onomatopoeia preview
 - Rename Color section to "Kachapo color" and remove sub-labels
@@ -72,6 +77,11 @@ Chrome ウェブストアからインストール（準備中）
 または、このリポジトリをクローンして、Chromeの「デベロッパーモード」でパックされていない拡張機能として読み込んでください。
 
 ## 更新履歴
+
+### v1.0.5
+- Kachapo color の設定が縁取り色に反映されないバグを修正
+- Kachapo color のラベルを「黒で縁取り」「白で縁取り」に変更
+- 「デバイス自動」カラーオプションを削除
 
 ### v1.0.4
 - 「Saved」自動消え表示を廃止し、擬音プレビューアニメーションに置き換え

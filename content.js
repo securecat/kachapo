@@ -113,10 +113,7 @@ function pick(list) {
 }
 
 function strokeColor() {
-  const c = settings.color;
-  if (c === 'light') return '#000';
-  if (c === 'dark')  return '#fff';
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? '#fff' : '#000';
+  return settings.color === 'dark' ? '#fff' : '#000';
 }
 
 // ── 擬音を画面に出す ──────────────────────────

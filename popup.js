@@ -22,12 +22,22 @@ const ONOMA = {
 };
 
 chrome.storage.local.get(KEYS.map(k => 'kp-' + k), (result) => {
+  const toSave = {};
   KEYS.forEach(key => {
-    const val = result['kp-' + key] || DEFAULTS[key];
-    current[key] = val;
-    const el = document.querySelector(`input[name=${key}][value="${val}"]`);
-    if (el) el.checked = true;
+    const storageKey = 'kp-' + key;
+    const stored = result[storageKey];
+    const el = stored && document.querySelector(`input[name=${key}][value="${stored}"]`);
+    if (el) {
+      el.checked = true;
+      current[key] = stored;
+    } else {
+      current[key] = DEFAULTS[key];
+      const defaultEl = document.querySelector(`input[name=${key}][value="${DEFAULTS[key]}"]`);
+      if (defaultEl) defaultEl.checked = true;
+      toSave[storageKey] = DEFAULTS[key];
+    }
   });
+  if (Object.keys(toSave).length) chrome.storage.local.set(toSave);
 });
 
 function pick(list) {
@@ -39,7 +49,7 @@ function spawnOnoma(lang, radioEl) {
   const centerY = rect.top + rect.height / 2;
   const p       = pick(ONOMA[lang] || ONOMA.en);
   const rot     = (Math.random() * 16 - 8) + 'deg';
-  const stroke  = window.matchMedia('(prefers-color-scheme: dark)').matches ? '#fff' : '#000';
+  const stroke  = current.color === 'dark' ? '#fff' : '#000';
   const el      = document.createElement('div');
   el.setAttribute('aria-hidden', 'true');
   el.style.cssText = `
