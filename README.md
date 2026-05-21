@@ -34,6 +34,9 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## Changelog
 
+### v1.0.8
+- Adjust typing onomatopoeia position to appear above or below the input field
+
 ### v1.0.7
 - Reduce popup width from 300px to 250px
 
@@ -102,6 +105,9 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 4. **パッケージ化されていない拡張機能を読み込む** をクリックし、リポジトリのフォルダを選択
 
 ## 更新履歴
+
+### v1.0.8
+- 入力の邪魔にならないようにタイピング擬音の位置を調整
 
 ### v1.0.7
 - ポップアップの横幅を 300px から 250px に縮小

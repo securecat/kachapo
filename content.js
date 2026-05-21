@@ -273,5 +273,11 @@ document.addEventListener('keydown', (e) => {
   if (now - typeThrottle < TYPE_INTERVAL) return;
   typeThrottle = now;
   const coords = getCaretCoords(active);
-  spawnOnoma(coords.x, coords.y, pick(ONOMA[settings.lang].type), 'type');
+  const rect   = active.getBoundingClientRect();
+  const above  = Math.random() < 0.5;
+  const ty     = above
+    ? rect.top    - 8 - Math.random() * 16
+    : rect.bottom + 8 + Math.random() * 16;
+  const tx     = coords.x + (Math.random() * 40 - 20);
+  spawnOnoma(tx, ty, pick(ONOMA[settings.lang].type), 'type');
 }, true);
