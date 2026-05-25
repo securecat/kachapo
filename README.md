@@ -34,6 +34,9 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## Changelog
 
+### v1.0.9
+- Adjust drag-select onomatopoeia position to appear above or below the selection
+
 ### v1.0.8
 - Adjust typing onomatopoeia position to appear above or below the input field
 
@@ -105,6 +108,9 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 4. **パッケージ化されていない拡張機能を読み込む** をクリックし、リポジトリのフォルダを選択
 
 ## 更新履歴
+
+### v1.0.9
+- 選択範囲と被らないようにテキスト選択時の擬音語の位置を調整
 
 ### v1.0.8
 - 入力の邪魔にならないようにタイピング擬音の位置を調整

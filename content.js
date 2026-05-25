@@ -247,7 +247,12 @@ document.addEventListener('selectionchange', () => {
   const range = sel.getRangeAt(0);
   const r     = range.getBoundingClientRect();
   if (r.width === 0 && r.height === 0) return;
-  spawnOnoma(r.right, r.bottom, pick(ONOMA[settings.lang].drag), 'drag');
+  const above = Math.random() < 0.5;
+  const sy    = above
+    ? r.top    - 8 - Math.random() * 16
+    : r.bottom + 8 + Math.random() * 16;
+  const sx    = r.right + (Math.random() * 20 - 10);
+  spawnOnoma(sx, sy, pick(ONOMA[settings.lang].drag), 'drag');
   if (mouseIsDown) hasDragged = true;
 }, true);
 
