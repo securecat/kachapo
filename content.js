@@ -174,6 +174,13 @@ function strokeColor() {
   return settings.color === 'dark' ? '#fff' : '#000';
 }
 
+function pickAbove(rectTop, rectBottom) {
+  const canGoAbove = rectTop > 40;
+  const canGoBelow = rectBottom < window.innerHeight - 40;
+  if (canGoAbove && canGoBelow) return Math.random() < 0.5;
+  return canGoAbove;
+}
+
 // ── 擬音を画面に出す ──────────────────────────
 function spawnOnoma(x, y, p, kind) {
   const rot  = (Math.random() * 20 - 10) + 'deg';
@@ -312,7 +319,7 @@ document.addEventListener('selectionchange', () => {
   const r     = range.getBoundingClientRect();
   if (r.width === 0 && r.height === 0) return;
   if (settings.trigDrag) {
-    const above = Math.random() < 0.5;
+    const above = pickAbove(r.top, r.bottom);
     const sy    = above
       ? r.top    - 8 - Math.random() * 16
       : r.bottom + 8 + Math.random() * 16;
@@ -359,7 +366,7 @@ document.addEventListener('keydown', (e) => {
   typeThrottle = now;
   const coords = getCaretCoords(active);
   const rect   = active.getBoundingClientRect();
-  const above  = Math.random() < 0.5;
+  const above  = pickAbove(rect.top, rect.bottom);
   const ty     = above
     ? rect.top    - 8 - Math.random() * 16
     : rect.bottom + 8 + Math.random() * 16;

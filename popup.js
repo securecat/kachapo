@@ -68,9 +68,10 @@ function pick(list) {
   return list[Math.floor(Math.random() * list.length)];
 }
 
-function spawnOnoma(lang, fieldsetEl) {
-  const rect    = fieldsetEl.getBoundingClientRect();
-  const centerY = rect.top + rect.height / 2;
+function spawnOnoma(lang, targetEl) {
+  const rect    = targetEl.getBoundingClientRect();
+  const x       = rect.left + rect.width / 2 + (Math.random() * 20 - 10);
+  const y       = rect.top + rect.height / 2;
   const p       = pick(ONOMA[lang] || ONOMA.en);
   const rot     = (Math.random() * 16 - 8) + 'deg';
   const stroke  = current.color === 'dark' ? '#fff' : '#000';
@@ -78,8 +79,8 @@ function spawnOnoma(lang, fieldsetEl) {
   el.setAttribute('aria-hidden', 'true');
   el.style.cssText = `
     position: fixed;
-    right: 20px;
-    top: ${centerY}px;
+    left: ${x}px;
+    top: ${y - 10}px;
     color: ${p.color};
     font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', 'Noto Sans JP', system-ui, sans-serif;
     font-size: 26px;
@@ -105,7 +106,7 @@ document.querySelectorAll('input[type=radio]').forEach(radio => {
     chrome.storage.local.set({ ['kp-' + e.target.name]: e.target.value });
     current[e.target.name] = e.target.value;
     const lang = e.target.name === 'lang' ? e.target.value : current.lang;
-    spawnOnoma(lang, e.target.closest('fieldset'));
+    spawnOnoma(lang, e.target.closest('label') || e.target);
   });
 });
 
@@ -113,5 +114,6 @@ document.querySelectorAll('input[type=radio]').forEach(radio => {
 document.querySelectorAll('input[type=checkbox][name=trig]').forEach(cb => {
   cb.addEventListener('change', e => {
     chrome.storage.local.set({ ['kp-trig-' + e.target.value]: e.target.checked });
+    spawnOnoma(current.lang, e.target.closest('label') || e.target);
   });
 });
