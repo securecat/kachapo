@@ -1,6 +1,10 @@
-const KEYS     = ['lang', 'color'];
-const DEFAULTS = { lang: 'en', color: 'light' };
-const current  = { lang: 'en', color: 'light' };
+const RADIO_KEYS     = ['lang', 'color'];
+const RADIO_DEFAULTS = { lang: 'en', color: 'light' };
+
+const TRIG_KEYS     = ['click', 'drag', 'wheel', 'typing'];
+const TRIG_DEFAULTS = { click: true, drag: true, wheel: true, typing: true };
+
+const current = { lang: 'en', color: 'light' };
 
 const ONOMA = {
   en: [
@@ -21,9 +25,17 @@ const ONOMA = {
   ],
 };
 
-chrome.storage.local.get(KEYS.map(k => 'kp-' + k), (result) => {
+// ─ ストレージから読み込み ─────────────────────
+const allKeys = [
+  ...RADIO_KEYS.map(k => 'kp-' + k),
+  ...TRIG_KEYS.map(k => 'kp-trig-' + k),
+];
+
+chrome.storage.local.get(allKeys, (result) => {
   const toSave = {};
-  KEYS.forEach(key => {
+
+  // ラジオボタン
+  RADIO_KEYS.forEach(key => {
     const storageKey = 'kp-' + key;
     const stored = result[storageKey];
     const el = stored && document.querySelector(`input[name=${key}][value="${stored}"]`);
@@ -31,21 +43,33 @@ chrome.storage.local.get(KEYS.map(k => 'kp-' + k), (result) => {
       el.checked = true;
       current[key] = stored;
     } else {
-      current[key] = DEFAULTS[key];
-      const defaultEl = document.querySelector(`input[name=${key}][value="${DEFAULTS[key]}"]`);
+      current[key] = RADIO_DEFAULTS[key];
+      const defaultEl = document.querySelector(`input[name=${key}][value="${RADIO_DEFAULTS[key]}"]`);
       if (defaultEl) defaultEl.checked = true;
-      toSave[storageKey] = DEFAULTS[key];
+      toSave[storageKey] = RADIO_DEFAULTS[key];
     }
   });
+
+  // チェックボックス
+  TRIG_KEYS.forEach(key => {
+    const storageKey = 'kp-trig-' + key;
+    const stored = result[storageKey];
+    const val = (stored !== undefined) ? stored : TRIG_DEFAULTS[key];
+    const el  = document.querySelector(`input[type=checkbox][value="${key}"]`);
+    if (el) el.checked = val;
+    if (stored === undefined) toSave[storageKey] = TRIG_DEFAULTS[key];
+  });
+
   if (Object.keys(toSave).length) chrome.storage.local.set(toSave);
 });
 
+// ─ ユーティリティ ────────────────────────────
 function pick(list) {
   return list[Math.floor(Math.random() * list.length)];
 }
 
-function spawnOnoma(lang, radioEl) {
-  const rect    = radioEl.closest('fieldset').getBoundingClientRect();
+function spawnOnoma(lang, fieldsetEl) {
+  const rect    = fieldsetEl.getBoundingClientRect();
   const centerY = rect.top + rect.height / 2;
   const p       = pick(ONOMA[lang] || ONOMA.en);
   const rot     = (Math.random() * 16 - 8) + 'deg';
@@ -75,11 +99,19 @@ function spawnOnoma(lang, radioEl) {
   setTimeout(() => el.remove(), 1150);
 }
 
+// ─ ラジオボタン変更 ──────────────────────────
 document.querySelectorAll('input[type=radio]').forEach(radio => {
   radio.addEventListener('change', e => {
     chrome.storage.local.set({ ['kp-' + e.target.name]: e.target.value });
     current[e.target.name] = e.target.value;
     const lang = e.target.name === 'lang' ? e.target.value : current.lang;
-    spawnOnoma(lang, e.target);
+    spawnOnoma(lang, e.target.closest('fieldset'));
+  });
+});
+
+// ─ チェックボックス変更 ──────────────────────
+document.querySelectorAll('input[type=checkbox][name=trig]').forEach(cb => {
+  cb.addEventListener('change', e => {
+    chrome.storage.local.set({ ['kp-trig-' + e.target.value]: e.target.checked });
   });
 });

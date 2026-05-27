@@ -34,6 +34,12 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## Changelog
 
+### v1.1.0
+- Add mouse wheel trigger: onomatopoeia appears on scroll
+- Add trigger toggles in popup (Click / Drag / Wheel / Typing)
+- Fix popup font sizes to meet WCAG 2.2 AA minimum (16px)
+- Fix legend color contrast in popup
+
 ### v1.0.9
 - Adjust drag-select onomatopoeia position to appear above or below the selection
 
@@ -108,6 +114,12 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 4. **パッケージ化されていない拡張機能を読み込む** をクリックし、リポジトリのフォルダを選択
 
 ## 更新履歴
+
+### v1.1.0
+- マウスホイールトリガーを追加（スクロール時に擬音語が出る）
+- ポップアップにトリガーのON/OFFを追加（クリック・ドラッグ・ホイール・タイピング）
+- ポップアップのフォントサイズをWCAG 2.2 AA基準（16px最小）に修正
+- ポップアップの凡例テキストのコントラストを修正
 
 ### v1.0.9
 - 選択範囲と被らないようにテキスト選択時の擬音語の位置を調整

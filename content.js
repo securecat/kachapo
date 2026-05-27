@@ -23,6 +23,23 @@ const ONOMA = {
       { text: "Zip!",     color: "#DB2777" },
       { text: "Sweep~",   color: "#7C3AED" },
     ],
+    wheel: {
+      down: [
+        { text: "Scroll~",  color: "#7C3AED" },
+        { text: "Whirr~",   color: "#2563EB" },
+        { text: "Spin~",    color: "#D97706" },
+        { text: "Roll~",    color: "#059669" },
+        { text: "Zoom~",    color: "#DC2626" },
+        { text: "Slither~", color: "#0891B2" },
+      ],
+      up: [
+        { text: "Whoosh~",  color: "#DB2777" },
+        { text: "Glide~",   color: "#0891B2" },
+        { text: "Swoosh~",  color: "#7C3AED" },
+        { text: "Rise~",    color: "#2563EB" },
+        { text: "Slither~", color: "#059669" },
+      ],
+    },
     type: [
       { text: "Clackety!", color: "#7C3AED" },
       { text: "Clickety!", color: "#2563EB" },
@@ -53,6 +70,23 @@ const ONOMA = {
       { text: "ぐいっ",   color: "#DB2777" },
       { text: "ひゅっ",   color: "#7C3AED" },
     ],
+    wheel: {
+      down: [
+        { text: "くるくる", color: "#7C3AED" },
+        { text: "ごろごろ", color: "#2563EB" },
+        { text: "すべすべ", color: "#D97706" },
+        { text: "するする", color: "#059669" },
+        { text: "くるっ",   color: "#DC2626" },
+        { text: "ぬるぬる", color: "#0891B2" },
+      ],
+      up: [
+        { text: "するする", color: "#DB2777" },
+        { text: "すーっ",   color: "#0891B2" },
+        { text: "ひゅっ",   color: "#059669" },
+        { text: "すっ",     color: "#2563EB" },
+        { text: "ぬるぬる", color: "#7C3AED" },
+      ],
+    },
     type: [
       { text: "チャカポコ",   color: "#7C3AED" },
       { text: "カチャカチャ", color: "#2563EB" },
@@ -67,16 +101,34 @@ const ONOMA = {
 };
 
 // ── 設定 ─────────────────────────────────────
-const settings = { lang: 'en', color: 'light' };
+const settings = {
+  lang:       'en',
+  color:      'light',
+  trigClick:  true,
+  trigDrag:   true,
+  trigWheel:  true,
+  trigTyping: true,
+};
 
-chrome.storage.local.get(['kp-lang', 'kp-color'], (result) => {
-  if (result['kp-lang'])  settings.lang  = result['kp-lang'];
-  if (result['kp-color']) settings.color = result['kp-color'];
-});
+chrome.storage.local.get(
+  ['kp-lang', 'kp-color', 'kp-trig-click', 'kp-trig-drag', 'kp-trig-wheel', 'kp-trig-typing'],
+  (result) => {
+    if (result['kp-lang'])  settings.lang  = result['kp-lang'];
+    if (result['kp-color']) settings.color = result['kp-color'];
+    if (result['kp-trig-click']  !== undefined) settings.trigClick  = result['kp-trig-click'];
+    if (result['kp-trig-drag']   !== undefined) settings.trigDrag   = result['kp-trig-drag'];
+    if (result['kp-trig-wheel']  !== undefined) settings.trigWheel  = result['kp-trig-wheel'];
+    if (result['kp-trig-typing'] !== undefined) settings.trigTyping = result['kp-trig-typing'];
+  }
+);
 
 chrome.storage.onChanged.addListener((changes) => {
-  if (changes['kp-lang'])  settings.lang  = changes['kp-lang'].newValue;
-  if (changes['kp-color']) settings.color = changes['kp-color'].newValue;
+  if (changes['kp-lang'])        settings.lang       = changes['kp-lang'].newValue;
+  if (changes['kp-color'])       settings.color      = changes['kp-color'].newValue;
+  if (changes['kp-trig-click'])  settings.trigClick  = changes['kp-trig-click'].newValue;
+  if (changes['kp-trig-drag'])   settings.trigDrag   = changes['kp-trig-drag'].newValue;
+  if (changes['kp-trig-wheel'])  settings.trigWheel  = changes['kp-trig-wheel'].newValue;
+  if (changes['kp-trig-typing']) settings.trigTyping = changes['kp-trig-typing'].newValue;
 });
 
 // ── @keyframes 注入（初回のみ） ───────────────
@@ -96,6 +148,12 @@ chrome.storage.onChanged.addListener((changes) => {
       20%  { opacity:0.9; transform:scale(1.08) rotate(var(--rot)); }
       65%  { opacity:0.75; transform:scale(1.0) rotate(var(--rot)); }
       100% { opacity:0; transform:scale(0.8) translateY(-12px) rotate(var(--rot)); }
+    }
+    @keyframes kp-wheel {
+      0%   { opacity:0; transform:scale(0.5) rotate(var(--rot)); }
+      18%  { opacity:1; transform:scale(1.2) rotate(var(--rot)); }
+      60%  { opacity:0.85; transform:scale(1.0) rotate(var(--rot)); }
+      100% { opacity:0; transform:scale(0.8) translateY(-16px) rotate(var(--rot)); }
     }
     @keyframes kp-type {
       0%   { opacity:0; transform:scale(0.5) rotate(var(--rot)); }
@@ -119,8 +177,8 @@ function strokeColor() {
 // ── 擬音を画面に出す ──────────────────────────
 function spawnOnoma(x, y, p, kind) {
   const rot  = (Math.random() * 20 - 10) + 'deg';
-  const size = kind === 'click' ? '26px' : kind === 'drag' ? '18px' : '22px';
-  const anim = kind === 'click' ? 'kp-click 1.1s' : kind === 'drag' ? 'kp-drag 0.9s' : 'kp-type 1.0s';
+  const size = kind === 'click' ? '26px' : kind === 'drag' ? '18px' : kind === 'wheel' ? '24px' : '22px';
+  const anim = kind === 'click' ? 'kp-click 1.1s' : kind === 'drag' ? 'kp-drag 0.9s' : kind === 'wheel' ? 'kp-wheel 1.0s' : 'kp-type 1.0s';
   const dur  = kind === 'click' ? 1150 : kind === 'drag' ? 950 : 1050;
 
   const el = document.createElement('div');
@@ -175,7 +233,7 @@ function getCaretCoords(el) {
   mirror.textContent = (el.value ?? '').slice(0, pos);
 
   const caret = document.createElement('span');
-  caret.textContent = '\u200b';
+  caret.textContent = '​';
   mirror.appendChild(caret);
   document.body.appendChild(mirror);
 
@@ -200,18 +258,20 @@ function isTypable(el) {
 }
 
 // ── 状態管理 ──────────────────────────────────
-let mouseIsDown  = false;
-let hasDragged   = false;
-let dragThrottle = 0;
-let selThrottle  = 0;
-let typeThrottle = 0;
-let lastMoveX    = 0;
-let lastMoveY    = 0;
+let mouseIsDown   = false;
+let hasDragged    = false;
+let dragThrottle  = 0;
+let selThrottle   = 0;
+let typeThrottle  = 0;
+let wheelThrottle = 0;
+let lastMoveX     = 0;
+let lastMoveY     = 0;
 
-const DRAG_INTERVAL = 280;
-const DRAG_MIN_DIST = 12;
-const SEL_INTERVAL  = 320;
-const TYPE_INTERVAL = 220;
+const DRAG_INTERVAL  = 280;
+const DRAG_MIN_DIST  = 12;
+const SEL_INTERVAL   = 320;
+const TYPE_INTERVAL  = 220;
+const WHEEL_INTERVAL = 200;
 
 // ── mousedown ─────────────────────────────────
 document.addEventListener('mousedown', (e) => {
@@ -219,7 +279,9 @@ document.addEventListener('mousedown', (e) => {
   hasDragged  = false;
   lastMoveX   = e.clientX;
   lastMoveY   = e.clientY;
-  spawnOnoma(e.clientX, e.clientY, pick(ONOMA[settings.lang].click), 'click');
+  if (settings.trigClick) {
+    spawnOnoma(e.clientX, e.clientY, pick(ONOMA[settings.lang].click), 'click');
+  }
 }, true);
 
 // ── mousemove ─────────────────────────────────
@@ -234,7 +296,9 @@ document.addEventListener('mousemove', (e) => {
   dragThrottle = now;
   lastMoveX    = e.clientX;
   lastMoveY    = e.clientY;
-  spawnOnoma(e.clientX, e.clientY, pick(ONOMA[settings.lang].drag), 'drag');
+  if (settings.trigDrag) {
+    spawnOnoma(e.clientX, e.clientY, pick(ONOMA[settings.lang].drag), 'drag');
+  }
 }, true);
 
 // ── selectionchange ───────────────────────────
@@ -247,23 +311,38 @@ document.addEventListener('selectionchange', () => {
   const range = sel.getRangeAt(0);
   const r     = range.getBoundingClientRect();
   if (r.width === 0 && r.height === 0) return;
-  const above = Math.random() < 0.5;
-  const sy    = above
-    ? r.top    - 8 - Math.random() * 16
-    : r.bottom + 8 + Math.random() * 16;
-  const sx    = r.right + (Math.random() * 20 - 10);
-  spawnOnoma(sx, sy, pick(ONOMA[settings.lang].drag), 'drag');
+  if (settings.trigDrag) {
+    const above = Math.random() < 0.5;
+    const sy    = above
+      ? r.top    - 8 - Math.random() * 16
+      : r.bottom + 8 + Math.random() * 16;
+    const sx    = r.right + (Math.random() * 20 - 10);
+    spawnOnoma(sx, sy, pick(ONOMA[settings.lang].drag), 'drag');
+  }
   if (mouseIsDown) hasDragged = true;
 }, true);
 
 // ── mouseup ───────────────────────────────────
 document.addEventListener('mouseup', (e) => {
-  if (hasDragged) {
+  if (hasDragged && settings.trigClick) {
     spawnOnoma(e.clientX, e.clientY, pick(ONOMA[settings.lang].click), 'click');
   }
   mouseIsDown = false;
   hasDragged  = false;
 }, true);
+
+// ── wheel ─────────────────────────────────────
+document.addEventListener('wheel', (e) => {
+  if (!settings.trigWheel) return;
+  const now = Date.now();
+  if (now - wheelThrottle < WHEEL_INTERVAL) return;
+  wheelThrottle = now;
+  const dir  = e.deltaY > 0 ? 'down' : 'up';
+  const list = ONOMA[settings.lang].wheel[dir];
+  const x    = e.clientX + (Math.random() * 60 - 30);
+  const y    = e.clientY + (Math.random() * 60 - 30);
+  spawnOnoma(x, y, pick(list), 'wheel');
+}, { passive: true, capture: true });
 
 // ── keydown ───────────────────────────────────
 document.addEventListener('keydown', (e) => {
@@ -274,6 +353,7 @@ document.addEventListener('keydown', (e) => {
   const navKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
                    'Home', 'End', 'PageUp', 'PageDown', 'Tab'];
   if (navKeys.includes(e.key)) return;
+  if (!settings.trigTyping) return;
   const now = Date.now();
   if (now - typeThrottle < TYPE_INTERVAL) return;
   typeThrottle = now;
