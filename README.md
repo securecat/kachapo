@@ -39,6 +39,9 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 - Add trigger toggles in popup (Click / Drag / Wheel / Typing)
 - Fix popup font sizes to meet WCAG 2.2 AA minimum (16px)
 - Fix legend color contrast in popup
+- Fix onomatopoeia clipping: avoid showing mostly off-screen when input is near viewport edge
+- Fix popup preview: onomatopoeia now appears near the interacted label
+- Add onomatopoeia on checkbox toggle in popup
 
 ### v1.0.9
 - Adjust drag-select onomatopoeia position to appear above or below the selection
@@ -120,6 +123,9 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 - ポップアップにトリガーのON/OFFを追加（クリック・ドラッグ・ホイール・タイピング）
 - ポップアップのフォントサイズをWCAG 2.2 AA基準（16px最小）に修正
 - ポップアップの凡例テキストのコントラストを修正
+- 入力欄がビューポート端に近い時に擬音語が見切れる問題を修正
+- ポップアップ内の擬音語プレビューを操作したラベルの近くに表示するよう修正
+- ポップアップ内のチェックボックス操作でも擬音語が表示されるよう追加
 
 ### v1.0.9
 - 選択範囲と被らないようにテキスト選択時の擬音語の位置を調整
