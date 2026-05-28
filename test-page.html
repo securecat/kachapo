@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kachapo 動作確認ページ</title>
+  <style>
+    :root {
+      --bg:      #f4f4f5;
+      --surface: #ffffff;
+      --border:  #e4e4e7;
+      --text:    #18181b;
+      --muted:   #71717a;
+      --accent:  #7C3AED;
+      --radius:  8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', 'Noto Sans JP', system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+      padding: 2rem 1rem 4rem;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    p { margin-bottom: 1em; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ─ スクロールボックス ─ */
+    .scroll-box {
+      height: 220px;
+      overflow-y: scroll;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.75rem 1rem;
+      background: var(--bg);
+      font-size: 0.9rem;
+    }
+
+    iframe.scroll-box {
+      width: 100%;
+      padding: 0;
+      display: block;
+    }
+
+    /* ─ input グリッド ─ */
+    .input-grid { display: grid; gap: 0.625rem; }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .input-row > label {
+      font-size: 0.875rem;
+      color: var(--muted);
+      font-family: monospace;
+    }
+
+    input[type=text], input[type=password], input[type=email],
+    input[type=number], input[type=tel], input[type=url],
+    input[type=search], input[type=date], input[type=time],
+    input[type=datetime-local], input[type=month], input[type=week],
+    select, textarea {
+      width: 100%;
+      padding: 5px 10px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-family: inherit;
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    textarea { resize: vertical; }
+
+    /* ─ スイッチ ─ */
+    .switch-group { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+
+    .switch-wrap { display: flex; align-items: center; gap: 0.6rem; cursor: pointer; }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 46px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .switch-track {
+      position: absolute;
+      inset: 0;
+      background: #ccc;
+      border-radius: 13px;
+      transition: background .2s;
+    }
+    .switch-track::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 3px;
+      top: 3px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0,0,0,.2);
+      transition: transform .2s;
+    }
+    .switch input:checked + .switch-track { background: var(--accent); }
+    .switch input:checked + .switch-track::before { transform: translateX(20px); }
+    .switch input:focus-visible + .switch-track {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* ─ contenteditable ─ */
+    .editable {
+      min-height: 100px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.75rem 1rem;
+      background: var(--bg);
+      font-size: 1rem;
+      line-height: 1.75;
+      outline: none;
+    }
+    .editable:focus { border-color: var(--accent); }
+    .editable:empty::before {
+      content: attr(data-placeholder);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    /* ─ button ─ */
+    .btn-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    button, input[type=submit], input[type=reset] {
+      padding: 7px 18px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background .12s;
+    }
+    button:hover, input[type=submit]:hover, input[type=reset]:hover { background: var(--bg); }
+    button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ─ イメージスライダー ─ */
+    .slider-wrap {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .slider-track {
+      display: flex;
+      transition: transform .4s ease;
+    }
+    .slide {
+      min-width: 100%;
+      aspect-ratio: 16 / 6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,.3);
+    }
+    .slide:nth-child(1) { background: #7C3AED; }
+    .slide:nth-child(2) { background: #D97706; }
+    .slide:nth-child(3) { background: #059669; }
+    .slide:nth-child(4) { background: #DC2626; }
+    .slide:nth-child(5) { background: #2563EB; }
+
+    .slider-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+    }
+    .slide-btn { padding: 4px 14px; font-size: 0.875rem; }
+    .slider-dots { display: flex; gap: 0.4rem; }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .dot.active { background: var(--accent); }
+
+    /* ─ ドラッグ＆ドロップ ─ */
+    .drag-area {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .drag-source {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .drag-item {
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      cursor: grab;
+      user-select: none;
+      font-size: 0.9rem;
+      transition: opacity .15s, box-shadow .15s;
+    }
+    .drag-item:active { cursor: grabbing; }
+    .drag-item.dragging { opacity: 0.4; }
+    .drop-zone {
+      flex: 1;
+      min-width: 180px;
+      min-height: 120px;
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: border-color .15s, background .15s;
+    }
+    .drop-zone.over {
+      border-color: var(--accent);
+      background: #ede9fe;
+    }
+    .drop-zone-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>kachapo 動作確認ページ</h1>
+
+  <!-- ふつうの文章 -->
+  <section>
+    <h2>ふつうの文章</h2>
+    <p>吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。</p>
+    <p>山路を登りながら、こう考えた。智に働けば角が立つ。情に棹させば流される。意地を通せば窮屈だ。とかくに人の世は住みにくい。住みにくさが高じると、安い所へ引き越したくなる。どこへ越しても住みにくいと悟った時、詩が生れて、画が出来る。</p>
+    <p>親譲りの無鉄砲で小供の時から損ばかりしている。小学校に居る時分学校の二階から飛び下りて一週間ほど腰を抜かした事がある。なぜそんな無闇をしたと聞く人があるかもしれない。別段深い理由でもない。新築の二階から首を出していたら、同級生の一人が冗談に、いくら威張っても、そこから飛び降りる事は出来まい、弱虫やーい、と囃したからである。</p>
+  </section>
+
+  <!-- スクロール iframe -->
+  <section>
+    <h2>スクロール要素（iframe）</h2>
+    <iframe id="scroll-iframe" class="scroll-box" title="スクロール確認用テキスト"></iframe>
+  </section>
+
+  <!-- スクロール div overflow -->
+  <section>
+    <h2>スクロール要素（div overflow）</h2>
+    <div class="scroll-box">
+      <p>春はあけぼの。やうやう白くなりゆく山ぎは少し明かりて、紫だちたる雲の細くたなびきたる。</p>
+      <p>夏は夜。月のころはさらなり、闇もなほ、蛍の多く飛びちがひたる。また、ただ一つ二つなど、ほのかにうち光りて行くもをかし。雨など降るもをかし。</p>
+      <p>秋は夕暮れ。夕日のさして山の端いと近うなりたるに、烏の寝どころへ行くとて、三つ四つ、二つ三つなど、飛び急ぐさへあはれなり。まいて雁などのつらねたるが、いと小さく見ゆるは、いとをかし。日入り果てて、風の音、虫の音など、はた言ふべきにあらず。</p>
+      <p>冬はつとめて。雪の降りたるは言ふべきにもあらず、霜のいと白きも、またさらでも、いと寒きに、火など急ぎおこして、炭もて渡るも、いとつきづきし。昼になりて、ぬるくゆるびもていけば、火桶の火も白き灰がちになりてわろし。</p>
+      <p>国境の長いトンネルを抜けると雪国であった。夜の底が白くなった。信号所に汽車が止まった。向側の座席から娘が立って来て、島村の前のガラス窓を落した。雪の冷気が流れ込んだ。</p>
+      <p>娘は窓いっぱいに乗り出して、遠くへ叫ぶように、駅長さあん、駅長さあん、と呼んだ。雪を踏む足音が聞こえた。暗い夜であった。暗い中を白い雪が光っているのだった。</p>
+      <p>灯のともった客車の中が、外の雪よりも暗いくらいに感じられた。島村は汽車が動き出すのを待っていた。遠くの山から風が吹き下ろしてきた。</p>
+    </div>
+  </section>
+
+  <!-- input 各種 -->
+  <section>
+    <h2>input 各種</h2>
+    <div class="input-grid">
+      <div class="input-row">
+        <label for="i-text">text</label>
+        <input type="text" id="i-text" placeholder="テキストを入力">
+      </div>
+      <div class="input-row">
+        <label for="i-password">password</label>
+        <input type="password" id="i-password" placeholder="パスワード">
+      </div>
+      <div class="input-row">
+        <label for="i-email">email</label>
+        <input type="email" id="i-email" placeholder="example@mail.com">
+      </div>
+      <div class="input-row">
+        <label for="i-number">number</label>
+        <input type="number" id="i-number" placeholder="0">
+      </div>
+      <div class="input-row">
+        <label for="i-tel">tel</label>
+        <input type="tel" id="i-tel" placeholder="000-0000-0000">
+      </div>
+      <div class="input-row">
+        <label for="i-url">url</label>
+        <input type="url" id="i-url" placeholder="https://example.com">
+      </div>
+      <div class="input-row">
+        <label for="i-search">search</label>
+        <input type="search" id="i-search" placeholder="検索キーワード">
+      </div>
+      <div class="input-row">
+        <label for="i-date">date</label>
+        <input type="date" id="i-date">
+      </div>
+      <div class="input-row">
+        <label for="i-time">time</label>
+        <input type="time" id="i-time">
+      </div>
+      <div class="input-row">
+        <label for="i-datetime">datetime-local</label>
+        <input type="datetime-local" id="i-datetime">
+      </div>
+      <div class="input-row">
+        <label for="i-month">month</label>
+        <input type="month" id="i-month">
+      </div>
+      <div class="input-row">
+        <label for="i-week">week</label>
+        <input type="week" id="i-week">
+      </div>
+      <div class="input-row">
+        <label for="i-color">color</label>
+        <input type="color" id="i-color" value="#7C3AED" style="width:48px;height:36px;padding:2px;cursor:pointer;">
+      </div>
+      <div class="input-row">
+        <label for="i-range">range</label>
+        <input type="range" id="i-range" min="0" max="100" value="50">
+      </div>
+      <div class="input-row">
+        <label for="i-file">file</label>
+        <input type="file" id="i-file">
+      </div>
+      <div class="input-row">
+        <label>checkbox</label>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <label><input type="checkbox"> 選択肢A</label>
+          <label><input type="checkbox"> 選択肢B</label>
+          <label><input type="checkbox" checked> 選択肢C</label>
+        </div>
+      </div>
+      <div class="input-row">
+        <label>radio</label>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <label><input type="radio" name="r1" value="1" checked> 選択肢1</label>
+          <label><input type="radio" name="r1" value="2"> 選択肢2</label>
+          <label><input type="radio" name="r1" value="3"> 選択肢3</label>
+        </div>
+      </div>
+      <div class="input-row">
+        <label>submit / reset</label>
+        <div style="display:flex;gap:0.5rem;">
+          <input type="submit" value="送信">
+          <input type="reset" value="リセット">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- スイッチ -->
+  <section>
+    <h2>スイッチ（checkbox + CSS）</h2>
+    <div class="switch-group">
+      <label class="switch-wrap">
+        <span class="switch">
+          <input type="checkbox" role="switch">
+          <span class="switch-track"></span>
+        </span>
+        スイッチA
+      </label>
+      <label class="switch-wrap">
+        <span class="switch">
+          <input type="checkbox" role="switch" checked>
+          <span class="switch-track"></span>
+        </span>
+        スイッチB（初期ON）
+      </label>
+      <label class="switch-wrap">
+        <span class="switch">
+          <input type="checkbox" role="switch">
+          <span class="switch-track"></span>
+        </span>
+        スイッチC
+      </label>
+    </div>
+  </section>
+
+  <!-- select 単一 -->
+  <section>
+    <h2>select（単一選択）</h2>
+    <label for="sel-single">季節を選択</label>
+    <select id="sel-single" style="margin-top:0.5rem;">
+      <option value="">-- 選択してください --</option>
+      <option>春</option>
+      <option>夏</option>
+      <option>秋</option>
+      <option>冬</option>
+    </select>
+  </section>
+
+  <!-- select 複数 -->
+  <section>
+    <h2>select（複数選択）</h2>
+    <label for="sel-multi">作品を選択（複数可）</label>
+    <select id="sel-multi" multiple size="6" style="margin-top:0.5rem;">
+      <option>吾輩は猫である</option>
+      <option>坊っちゃん</option>
+      <option>草枕</option>
+      <option>三四郎</option>
+      <option>こころ</option>
+      <option>雪国</option>
+      <option>伊豆の踊子</option>
+    </select>
+  </section>
+
+  <!-- textarea -->
+  <section>
+    <h2>textarea</h2>
+    <label for="ta">自由記述</label>
+    <textarea id="ta" rows="5" style="margin-top:0.5rem;" placeholder="ここに文章を入力できます。"></textarea>
+  </section>
+
+  <!-- contenteditable -->
+  <section>
+    <h2>contenteditable</h2>
+    <div
+      class="editable"
+      contenteditable="true"
+      role="textbox"
+      aria-multiline="true"
+      aria-label="編集可能テキスト"
+      data-placeholder="ここをクリックして編集できます。テキスト選択やタイピングをお試しください。"
+    >吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。</div>
+  </section>
+
+  <!-- button -->
+  <section>
+    <h2>button</h2>
+    <div class="btn-row">
+      <button type="button">ふつうのボタン</button>
+      <button type="button" style="background:var(--accent);color:#fff;border-color:var(--accent);">アクセントボタン</button>
+      <button type="button" style="background:#DC2626;color:#fff;border-color:#DC2626;">危険ボタン</button>
+      <button type="button" disabled>無効ボタン</button>
+    </div>
+  </section>
+
+  <!-- イメージスライダー -->
+  <section>
+    <h2>イメージスライダー</h2>
+    <div class="slider-wrap">
+      <div id="slider-track" class="slider-track">
+        <div class="slide">春 — 山路を登りながら</div>
+        <div class="slide">夏 — 蛍の多く飛びちがひたる</div>
+        <div class="slide">秋 — 夕日のさして</div>
+        <div class="slide">冬 — 雪の降りたるは</div>
+        <div class="slide">新年 — 吾輩は猫である</div>
+      </div>
+      <div class="slider-footer">
+        <button class="slide-btn" id="slide-prev" type="button">←</button>
+        <div class="slider-dots" id="slider-dots"></div>
+        <button class="slide-btn" id="slide-next" type="button">→</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ドラッグ＆ドロップ -->
+  <section>
+    <h2>ドラッグ＆ドロップ</h2>
+    <div class="drag-area">
+      <div class="drag-source" id="drag-source">
+        <div class="drag-item" draggable="true" data-id="1">🌸 春</div>
+        <div class="drag-item" draggable="true" data-id="2">🌻 夏</div>
+        <div class="drag-item" draggable="true" data-id="3">🍁 秋</div>
+        <div class="drag-item" draggable="true" data-id="4">❄️ 冬</div>
+      </div>
+      <div class="drop-zone" id="drop-zone" aria-label="ドロップゾーン">
+        <div class="drop-zone-label">ここにドロップ</div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // ── iframe srcdoc ──────────────────────────────
+    document.getElementById('scroll-iframe').srcdoc = [
+      '<!DOCTYPE html><html lang="ja"><head><style>',
+      'body{margin:.75rem 1rem;font-family:system-ui,sans-serif;font-size:.9rem;line-height:1.75;color:#18181b}',
+      'p{margin-bottom:.9em}',
+      '</style></head><body>',
+      '<p>国境の長いトンネルを抜けると雪国であった。夜の底が白くなった。信号所に汽車が止まった。</p>',
+      '<p>向側の座席から娘が立って来て、島村の前のガラス窓を落した。雪の冷気が流れ込んだ。娘は窓いっぱいに乗り出して、遠くへ叫ぶように、駅長さあん、駅長さあん、と呼んだ。</p>',
+      '<p>雪を踏む足音が聞こえた。暗い夜であった。暗い中を白い雪が光っているのだった。灯のともった客車の中が、外の雪よりも暗いくらいに感じられた。</p>',
+      '<p>島村は汽車が動き出すのを待っていた。しかし何かがずきずきするように感じた。はっきりとした思い出というものはなかったが、ただその感覚だけが残っていた。</p>',
+      '<p>窓の外の景色は一面の白さだった。山は見えず、空も見えず、ただ白い靄の中を汽車は走り続けた。</p>',
+      '<p>やがて汽車は速度を落とし、小さな駅に停まった。プラットフォームには誰もいなかった。雪が静かに降り積もっていた。</p>',
+      '<p>遠くの山から風が吹き下ろしてきた。その風は冷たく、しかしどこか清々しい香りを運んできた。島村はしばらく窓の外を眺め続けた。</p>',
+      '<p>プラットフォームの端に、一本の電灯が灯っていた。その光は弱く、まるで今にも消えそうだった。しかし、それがかえって旅情をかき立てるように感じられた。</p>',
+      '</body></html>'
+    ].join('');
+
+    // ── スライダー ─────────────────────────────────
+    const track  = document.getElementById('slider-track');
+    const dotsEl = document.getElementById('slider-dots');
+    const total  = track.children.length;
+    let cur = 0;
+
+    for (let i = 0; i < total; i++) {
+      const d = document.createElement('button');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.type = 'button';
+      d.setAttribute('aria-label', `スライド ${i + 1}`);
+      d.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(d);
+    }
+
+    function goTo(n) {
+      cur = (n + total) % total;
+      track.style.transform = `translateX(-${cur * 100}%)`;
+      dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+    }
+
+    document.getElementById('slide-prev').addEventListener('click', () => goTo(cur - 1));
+    document.getElementById('slide-next').addEventListener('click', () => goTo(cur + 1));
+
+    // ── ドラッグ＆ドロップ ─────────────────────────
+    let dragged = null;
+
+    document.querySelectorAll('.drag-item').forEach(item => {
+      item.addEventListener('dragstart', () => {
+        dragged = item;
+        setTimeout(() => item.classList.add('dragging'), 0);
+      });
+      item.addEventListener('dragend', () => {
+        item.classList.remove('dragging');
+        dragged = null;
+      });
+    });
+
+    const dropZone = document.getElementById('drop-zone');
+    dropZone.addEventListener('dragover', e => {
+      e.preventDefault();
+      dropZone.classList.add('over');
+    });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('over'));
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('over');
+      if (dragged) dropZone.appendChild(dragged);
+    });
+
+    const dragSource = document.getElementById('drag-source');
+    dragSource.addEventListener('dragover', e => e.preventDefault());
+    dragSource.addEventListener('drop', e => {
+      e.preventDefault();
+      if (dragged) dragSource.appendChild(dragged);
+    });
+  </script>
+
+</body>
+</html>
