@@ -6,13 +6,14 @@
   <title>kachapo 動作確認ページ</title>
   <style>
     :root {
-      --bg:      #f4f4f5;
-      --surface: #ffffff;
-      --border:  #e4e4e7;
-      --text:    #18181b;
-      --muted:   #71717a;
-      --accent:  #7C3AED;
-      --radius:  8px;
+      --bg:        #f4f4f5;
+      --surface:   #ffffff;
+      --border:    #e4e4e7;
+      --ui-border: #949494;
+      --text:      #18181b;
+      --muted:     #71717a;
+      --accent:    #7C3AED;
+      --radius:    8px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -61,7 +62,7 @@
     .scroll-box {
       height: 220px;
       overflow-y: scroll;
-      border: 1px solid var(--border);
+      border: 1px solid var(--ui-border);
       border-radius: var(--radius);
       padding: 0.75rem 1rem;
       background: var(--bg);
@@ -97,7 +98,7 @@
     select, textarea {
       width: 100%;
       padding: 5px 10px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--ui-border);
       border-radius: var(--radius);
       font-size: 1rem;
       font-family: inherit;
@@ -123,7 +124,7 @@
     .switch-track {
       position: absolute;
       inset: 0;
-      background: #ccc;
+      background: #949494;
       border-radius: 13px;
       transition: background .2s;
     }
@@ -149,7 +150,7 @@
     /* ─ contenteditable ─ */
     .editable {
       min-height: 100px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--ui-border);
       border-radius: var(--radius);
       padding: 0.75rem 1rem;
       background: var(--bg);
@@ -169,7 +170,7 @@
 
     button, input[type=submit], input[type=reset] {
       padding: 7px 18px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--ui-border);
       border-radius: var(--radius);
       background: var(--surface);
       color: var(--text);
@@ -221,7 +222,7 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--border);
+      background: #949494;
       border: none;
       padding: 0;
       cursor: pointer;
@@ -243,7 +244,7 @@
     }
     .drag-item {
       padding: 8px 16px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--ui-border);
       border-radius: var(--radius);
       background: var(--surface);
       cursor: grab;
@@ -257,7 +258,7 @@
       flex: 1;
       min-width: 180px;
       min-height: 120px;
-      border: 2px dashed var(--border);
+      border: 2px dashed var(--ui-border);
       border-radius: var(--radius);
       padding: 0.75rem;
       display: flex;
