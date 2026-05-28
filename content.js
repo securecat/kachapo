@@ -355,7 +355,29 @@ document.addEventListener('wheel', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Shift' || e.key === 'Control' || e.key === 'Alt' || e.key === 'Meta') return;
   if (e.ctrlKey || e.altKey || e.metaKey) return;
+
   const active = document.activeElement;
+
+  // チェックボックス・ラジオボタンのキーボード操作
+  if (active) {
+    const t = (active.type || '').toLowerCase();
+    const isCheckbox = t === 'checkbox';
+    const isRadio    = t === 'radio';
+    const isArrow    = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key);
+    if ((isCheckbox && e.key === ' ') || (isRadio && (e.key === ' ' || isArrow))) {
+      if (!settings.trigClick) return;
+      const rect = active.getBoundingClientRect();
+      spawnOnoma(
+        rect.left + rect.width  / 2 + (Math.random() * 20 - 10),
+        rect.top  + rect.height / 2,
+        pick(ONOMA[settings.lang].click),
+        'click'
+      );
+      return;
+    }
+  }
+
+  // テキスト入力欄のキーボード操作
   if (!isTypable(active)) return;
   const navKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
                    'Home', 'End', 'PageUp', 'PageDown', 'Tab'];

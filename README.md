@@ -34,6 +34,9 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## Changelog
 
+### v1.1.1 — 2026-05-28
+- Fix: onomatopoeia now appears on keyboard operation of checkboxes and radio buttons (Space / arrow keys)
+
 ### v1.1.0 — 2026-05-28
 - Add mouse wheel trigger: onomatopoeia appears on scroll
 - Add trigger toggles in popup (Click / Drag / Wheel / Typing)
@@ -117,6 +120,9 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 4. **パッケージ化されていない拡張機能を読み込む** をクリックし、リポジトリのフォルダを選択
 
 ## 更新履歴
+
+### v1.1.1 — 2026-05-28
+- チェックボックス・ラジオボタンのキーボード操作（Space・矢印キー）でも擬音語が出るよう修正
 
 ### v1.1.0 — 2026-05-28
 - マウスホイールトリガーを追加（スクロール時に擬音語が出る）
