@@ -165,6 +165,16 @@
       pointer-events: none;
     }
 
+    /* ─ リンク ─ */
+    a:visited { color: LinkText; }
+
+    /* ─ リンク画像 ─ */
+    .link-img {
+      display: block;
+      border-radius: var(--radius);
+      border: 2px solid LinkText;
+    }
+
     /* ─ button ─ */
     .btn-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
@@ -496,7 +506,7 @@
         alt="kachapo — Chrome拡張"
         width="220"
         height="140"
-        style="display:block;border-radius:var(--radius);border:1px solid var(--border);"
+        class="link-img"
       >
     </a>
   </section>
