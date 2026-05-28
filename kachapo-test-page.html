@@ -239,6 +239,8 @@
       transition: background .2s;
     }
     .dot.active { background: var(--accent); }
+    .dot:hover { background: #949494; }
+    .dot.active:hover { background: var(--accent); }
 
     /* ─ ドラッグ＆ドロップ ─ */
     .drag-area {
@@ -403,8 +405,8 @@
       <div class="input-row">
         <span class="input-row-type">submit / reset</span>
         <div style="display:flex;gap:0.5rem;">
-          <input type="submit" value="送信">
-          <input type="reset" value="リセット">
+          <button type="submit">送信</button>
+          <button type="reset">リセット</button>
         </div>
       </div>
     </div>
