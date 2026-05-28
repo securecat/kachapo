@@ -9,7 +9,9 @@
 - [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 形式に従うこと（ただし `[Unreleased]` セクションは使わない）
 - 英語セクション → `---` → 日本語セクションの構成
 - バージョン見出し形式：`## [1.2.0] - 2026-05-28`
-- 変更はカテゴリ別に記載すること：`### Added` / `### Changed` / `### Fixed` / `### Removed`
+- 変更は `###` 見出しでカテゴリ別に記載すること
+  - 英語セクション：`Added` / `Changed` / `Deprecated` / `Removed` / `Fixed` / `Security`
+  - 日本語セクション：`追加` / `変更` / `非推奨` / `削除` / `修正` / `セキュリティ`
 
 ### README.md（最新バージョンのみ）
 
