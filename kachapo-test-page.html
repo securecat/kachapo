@@ -35,12 +35,11 @@
       color: var(--accent);
       margin-bottom: 2.5rem;
       padding-bottom: 0.75rem;
-      border-bottom: 2px solid var(--border);
     }
 
     section {
       background: var(--surface);
-      border: 1px solid var(--border);
+      border: 1px solid #A565F8;
       border-radius: var(--radius);
       padding: 1.5rem;
       margin-bottom: 1.5rem;
@@ -85,7 +84,8 @@
       gap: 0.5rem;
     }
 
-    .input-row > label {
+    .input-row > label,
+    .input-row-type {
       font-size: 0.875rem;
       color: var(--muted);
       font-family: monospace;
@@ -293,7 +293,7 @@
   <!-- スクロール iframe -->
   <section>
     <h2>スクロール要素（iframe）</h2>
-    <iframe id="scroll-iframe" class="scroll-box" title="スクロール確認用テキスト"></iframe>
+    <iframe id="scroll-iframe" class="scroll-box" title="スクロール確認用テキスト" loading="lazy"></iframe>
   </section>
 
   <!-- スクロール div overflow -->
@@ -375,7 +375,7 @@
         <input type="file" id="i-file">
       </div>
       <div class="input-row">
-        <label>checkbox</label>
+        <span class="input-row-type">checkbox</span>
         <div style="display:flex;gap:1rem;flex-wrap:wrap;">
           <label><input type="checkbox"> 選択肢A</label>
           <label><input type="checkbox"> 選択肢B</label>
@@ -383,7 +383,7 @@
         </div>
       </div>
       <div class="input-row">
-        <label>radio</label>
+        <span class="input-row-type">radio</span>
         <div style="display:flex;gap:1rem;flex-wrap:wrap;">
           <label><input type="radio" name="r1" value="1" checked> 選択肢1</label>
           <label><input type="radio" name="r1" value="2"> 選択肢2</label>
@@ -391,7 +391,7 @@
         </div>
       </div>
       <div class="input-row">
-        <label>submit / reset</label>
+        <span class="input-row-type">submit / reset</span>
         <div style="display:flex;gap:0.5rem;">
           <input type="submit" value="送信">
           <input type="reset" value="リセット">
@@ -406,21 +406,21 @@
     <div class="switch-group">
       <label class="switch-wrap">
         <span class="switch">
-          <input type="checkbox" role="switch">
+          <input type="checkbox" >
           <span class="switch-track"></span>
         </span>
         スイッチA
       </label>
       <label class="switch-wrap">
         <span class="switch">
-          <input type="checkbox" role="switch" checked>
+          <input type="checkbox"  checked>
           <span class="switch-track"></span>
         </span>
         スイッチB（初期ON）
       </label>
       <label class="switch-wrap">
         <span class="switch">
-          <input type="checkbox" role="switch">
+          <input type="checkbox" >
           <span class="switch-track"></span>
         </span>
         スイッチC
@@ -530,7 +530,7 @@
         <div class="drag-item" draggable="true" data-id="3">🍁 秋</div>
         <div class="drag-item" draggable="true" data-id="4">❄️ 冬</div>
       </div>
-      <div class="drop-zone" id="drop-zone" aria-label="ドロップゾーン">
+      <div class="drop-zone" id="drop-zone" role="group" aria-label="ドロップゾーン">
         <div class="drop-zone-label">ここにドロップ</div>
       </div>
     </div>
