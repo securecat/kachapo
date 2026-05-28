@@ -6,7 +6,7 @@
 
 ### CHANGELOG.md（全履歴）
 
-- [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 形式に従うこと
+- [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 形式に従うこと（ただし `[Unreleased]` セクションは使わない）
 - 英語セクション → `---` → 日本語セクションの構成
 - バージョン見出し形式：`## [1.2.0] - 2026-05-28`
 - 変更はカテゴリ別に記載すること：`### Added` / `### Changed` / `### Fixed` / `### Removed`
