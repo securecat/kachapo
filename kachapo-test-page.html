@@ -284,9 +284,9 @@
   <!-- ふつうの文章 -->
   <section>
     <h2>ふつうの文章</h2>
-    <p>吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。</p>
-    <p>山路を登りながら、こう考えた。智に働けば角が立つ。情に棹させば流される。意地を通せば窮屈だ。とかくに人の世は住みにくい。住みにくさが高じると、安い所へ引き越したくなる。どこへ越しても住みにくいと悟った時、詩が生れて、画が出来る。</p>
-    <p>親譲りの無鉄砲で小供の時から損ばかりしている。小学校に居る時分学校の二階から飛び下りて一週間ほど腰を抜かした事がある。なぜそんな無闇をしたと聞く人があるかもしれない。別段深い理由でもない。新築の二階から首を出していたら、同級生の一人が冗談に、いくら威張っても、そこから飛び降りる事は出来まい、弱虫やーい、と囃したからである。</p>
+    <p><a href="#">夏目漱石</a>『吾輩は猫である』より。吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは<a href="#">書生</a>という人間中で一番獰悪な種族であったそうだ。</p>
+    <p>同じく漱石『<a href="#">草枕</a>』より。山路を登りながら、こう考えた。智に働けば角が立つ。情に棹させば流される。意地を通せば窮屈だ。とかくに人の世は住みにくい。住みにくさが高じると、安い所へ引き越したくなる。どこへ越しても住みにくいと悟った時、<a href="#">詩が生れて、画が出来る</a>。</p>
+    <p>同じく漱石『<a href="#">坊っちゃん</a>』より。親譲りの無鉄砲で小供の時から損ばかりしている。小学校に居る時分学校の二階から飛び下りて一週間ほど腰を抜かした事がある。なぜそんな無闇をしたと聞く人があるかもしれない。別段深い理由でもない。新築の二階から首を出していたら、同級生の一人が冗談に、いくら威張っても、そこから飛び降りる事は出来まい、弱虫やーい、と囃したからである。<a href="#">→ 青空文庫で読む</a></p>
   </section>
 
   <!-- スクロール iframe -->
@@ -486,6 +486,20 @@
     </div>
   </section>
 
+  <!-- リンク画像 -->
+  <section>
+    <h2>リンク画像</h2>
+    <a href="#">
+      <img
+        src="https://raw.githubusercontent.com/securecat/kachapo/refs/heads/main/promotion/small-tile440.png"
+        alt="kachapo — Chrome拡張"
+        width="220"
+        height="140"
+        style="display:block;border-radius:var(--radius);border:1px solid var(--border);"
+      >
+    </a>
+  </section>
+
   <!-- イメージスライダー -->
   <section>
     <h2>イメージスライダー</h2>
@@ -518,6 +532,9 @@
       <div class="drop-zone" id="drop-zone" aria-label="ドロップゾーン">
         <div class="drop-zone-label">ここにドロップ</div>
       </div>
+    </div>
+    <div style="margin-top:0.75rem;">
+      <button type="button" id="drag-reset">リセット</button>
     </div>
   </section>
 
@@ -594,6 +611,12 @@
     dragSource.addEventListener('drop', e => {
       e.preventDefault();
       if (dragged) dragSource.appendChild(dragged);
+    });
+
+    document.getElementById('drag-reset').addEventListener('click', () => {
+      const allItems = [...document.querySelectorAll('.drag-item')]
+        .sort((a, b) => a.dataset.id - b.dataset.id);
+      allItems.forEach(item => dragSource.appendChild(item));
     });
   </script>
 
