@@ -100,6 +100,8 @@ const ONOMA = {
   },
 };
 
+const DEFAULT_EXCLUDED_URLS = ['https://payment.dmm.com/receipt/issue/'];
+
 // ── 設定 ─────────────────────────────────────
 const settings = {
   lang:       'en',
@@ -109,61 +111,6 @@ const settings = {
   trigWheel:  true,
   trigTyping: true,
 };
-
-chrome.storage.local.get(
-  ['kp-lang', 'kp-color', 'kp-trig-click', 'kp-trig-drag', 'kp-trig-wheel', 'kp-trig-typing'],
-  (result) => {
-    if (result['kp-lang'])  settings.lang  = result['kp-lang'];
-    if (result['kp-color']) settings.color = result['kp-color'];
-    if (result['kp-trig-click']  !== undefined) settings.trigClick  = result['kp-trig-click'];
-    if (result['kp-trig-drag']   !== undefined) settings.trigDrag   = result['kp-trig-drag'];
-    if (result['kp-trig-wheel']  !== undefined) settings.trigWheel  = result['kp-trig-wheel'];
-    if (result['kp-trig-typing'] !== undefined) settings.trigTyping = result['kp-trig-typing'];
-  }
-);
-
-chrome.storage.onChanged.addListener((changes) => {
-  if (changes['kp-lang'])        settings.lang       = changes['kp-lang'].newValue;
-  if (changes['kp-color'])       settings.color      = changes['kp-color'].newValue;
-  if (changes['kp-trig-click'])  settings.trigClick  = changes['kp-trig-click'].newValue;
-  if (changes['kp-trig-drag'])   settings.trigDrag   = changes['kp-trig-drag'].newValue;
-  if (changes['kp-trig-wheel'])  settings.trigWheel  = changes['kp-trig-wheel'].newValue;
-  if (changes['kp-trig-typing']) settings.trigTyping = changes['kp-trig-typing'].newValue;
-});
-
-// ── @keyframes 注入（初回のみ） ───────────────
-(function injectStyles() {
-  if (document.getElementById('kachapo-style')) return;
-  const s = document.createElement('style');
-  s.id = 'kachapo-style';
-  s.textContent = `
-    @keyframes kp-click {
-      0%   { opacity:0; transform:scale(0.4) rotate(var(--rot)); }
-      15%  { opacity:1; transform:scale(1.3)  rotate(var(--rot)); }
-      55%  { opacity:1; transform:scale(1.0)  rotate(var(--rot)); }
-      100% { opacity:0; transform:scale(0.85) translateY(-22px) rotate(var(--rot)); }
-    }
-    @keyframes kp-drag {
-      0%   { opacity:0; transform:scale(0.5) rotate(var(--rot)); }
-      20%  { opacity:0.9; transform:scale(1.08) rotate(var(--rot)); }
-      65%  { opacity:0.75; transform:scale(1.0) rotate(var(--rot)); }
-      100% { opacity:0; transform:scale(0.8) translateY(-12px) rotate(var(--rot)); }
-    }
-    @keyframes kp-wheel {
-      0%   { opacity:0; transform:scale(0.5) rotate(var(--rot)); }
-      18%  { opacity:1; transform:scale(1.2) rotate(var(--rot)); }
-      60%  { opacity:0.85; transform:scale(1.0) rotate(var(--rot)); }
-      100% { opacity:0; transform:scale(0.8) translateY(-16px) rotate(var(--rot)); }
-    }
-    @keyframes kp-type {
-      0%   { opacity:0; transform:scale(0.5) rotate(var(--rot)); }
-      18%  { opacity:1; transform:scale(1.15) rotate(var(--rot)); }
-      55%  { opacity:0.85; transform:scale(1.0) rotate(var(--rot)); }
-      100% { opacity:0; transform:scale(0.8) translateY(-14px) rotate(var(--rot)); }
-    }
-  `;
-  document.head.appendChild(s);
-})();
 
 // ── ユーティリティ ────────────────────────────
 function pick(list) {
@@ -264,6 +211,40 @@ function isTypable(el) {
   return false;
 }
 
+// ── @keyframes 注入 ───────────────────────────
+function injectStyles() {
+  if (document.getElementById('kachapo-style')) return;
+  const s = document.createElement('style');
+  s.id = 'kachapo-style';
+  s.textContent = `
+    @keyframes kp-click {
+      0%   { opacity:0; transform:scale(0.4) rotate(var(--rot)); }
+      15%  { opacity:1; transform:scale(1.3)  rotate(var(--rot)); }
+      55%  { opacity:1; transform:scale(1.0)  rotate(var(--rot)); }
+      100% { opacity:0; transform:scale(0.85) translateY(-22px) rotate(var(--rot)); }
+    }
+    @keyframes kp-drag {
+      0%   { opacity:0; transform:scale(0.5) rotate(var(--rot)); }
+      20%  { opacity:0.9; transform:scale(1.08) rotate(var(--rot)); }
+      65%  { opacity:0.75; transform:scale(1.0) rotate(var(--rot)); }
+      100% { opacity:0; transform:scale(0.8) translateY(-12px) rotate(var(--rot)); }
+    }
+    @keyframes kp-wheel {
+      0%   { opacity:0; transform:scale(0.5) rotate(var(--rot)); }
+      18%  { opacity:1; transform:scale(1.2) rotate(var(--rot)); }
+      60%  { opacity:0.85; transform:scale(1.0) rotate(var(--rot)); }
+      100% { opacity:0; transform:scale(0.8) translateY(-16px) rotate(var(--rot)); }
+    }
+    @keyframes kp-type {
+      0%   { opacity:0; transform:scale(0.5) rotate(var(--rot)); }
+      18%  { opacity:1; transform:scale(1.15) rotate(var(--rot)); }
+      55%  { opacity:0.85; transform:scale(1.0) rotate(var(--rot)); }
+      100% { opacity:0; transform:scale(0.8) translateY(-14px) rotate(var(--rot)); }
+    }
+  `;
+  document.head.appendChild(s);
+}
+
 // ── 状態管理 ──────────────────────────────────
 let mouseIsDown   = false;
 let hasDragged    = false;
@@ -280,118 +261,145 @@ const SEL_INTERVAL   = 320;
 const TYPE_INTERVAL  = 220;
 const WHEEL_INTERVAL = 200;
 
-// ── mousedown ─────────────────────────────────
-document.addEventListener('mousedown', (e) => {
-  mouseIsDown = true;
-  hasDragged  = false;
-  lastMoveX   = e.clientX;
-  lastMoveY   = e.clientY;
-  if (settings.trigClick) {
-    spawnOnoma(e.clientX, e.clientY, pick(ONOMA[settings.lang].click), 'click');
+// ── 除外URL確認 + 初期化 ──────────────────────
+chrome.storage.local.get(
+  ['kp-excluded-urls', 'kp-lang', 'kp-color', 'kp-trig-click', 'kp-trig-drag', 'kp-trig-wheel', 'kp-trig-typing'],
+  (result) => {
+    const excluded = result['kp-excluded-urls'] ?? DEFAULT_EXCLUDED_URLS;
+    if (excluded.some(u => window.location.href.startsWith(u))) return;
+
+    if (result['kp-lang'])  settings.lang  = result['kp-lang'];
+    if (result['kp-color']) settings.color = result['kp-color'];
+    if (result['kp-trig-click']  !== undefined) settings.trigClick  = result['kp-trig-click'];
+    if (result['kp-trig-drag']   !== undefined) settings.trigDrag   = result['kp-trig-drag'];
+    if (result['kp-trig-wheel']  !== undefined) settings.trigWheel  = result['kp-trig-wheel'];
+    if (result['kp-trig-typing'] !== undefined) settings.trigTyping = result['kp-trig-typing'];
+
+    injectStyles();
+
+    chrome.storage.onChanged.addListener((changes) => {
+      if (changes['kp-lang'])        settings.lang       = changes['kp-lang'].newValue;
+      if (changes['kp-color'])       settings.color      = changes['kp-color'].newValue;
+      if (changes['kp-trig-click'])  settings.trigClick  = changes['kp-trig-click'].newValue;
+      if (changes['kp-trig-drag'])   settings.trigDrag   = changes['kp-trig-drag'].newValue;
+      if (changes['kp-trig-wheel'])  settings.trigWheel  = changes['kp-trig-wheel'].newValue;
+      if (changes['kp-trig-typing']) settings.trigTyping = changes['kp-trig-typing'].newValue;
+    });
+
+    // ── mousedown ─────────────────────────────
+    document.addEventListener('mousedown', (e) => {
+      mouseIsDown = true;
+      hasDragged  = false;
+      lastMoveX   = e.clientX;
+      lastMoveY   = e.clientY;
+      if (settings.trigClick) {
+        spawnOnoma(e.clientX, e.clientY, pick(ONOMA[settings.lang].click), 'click');
+      }
+    }, true);
+
+    // ── mousemove ─────────────────────────────
+    document.addEventListener('mousemove', (e) => {
+      if (!mouseIsDown || e.buttons === 0) return;
+      const dx   = e.clientX - lastMoveX;
+      const dy   = e.clientY - lastMoveY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const now  = Date.now();
+      if (dist < DRAG_MIN_DIST || now - dragThrottle < DRAG_INTERVAL) return;
+      hasDragged   = true;
+      dragThrottle = now;
+      lastMoveX    = e.clientX;
+      lastMoveY    = e.clientY;
+      if (settings.trigDrag) {
+        spawnOnoma(e.clientX, e.clientY, pick(ONOMA[settings.lang].drag), 'drag');
+      }
+    }, true);
+
+    // ── selectionchange ───────────────────────
+    document.addEventListener('selectionchange', () => {
+      const sel = window.getSelection();
+      if (!sel || sel.isCollapsed) return;
+      const now = Date.now();
+      if (now - selThrottle < SEL_INTERVAL) return;
+      selThrottle = now;
+      const range = sel.getRangeAt(0);
+      const r     = range.getBoundingClientRect();
+      if (r.width === 0 && r.height === 0) return;
+      if (settings.trigDrag) {
+        const above = pickAbove(r.top, r.bottom);
+        const sy    = above
+          ? r.top    - 8 - Math.random() * 16
+          : r.bottom + 8 + Math.random() * 16;
+        const sx    = r.right + (Math.random() * 20 - 10);
+        spawnOnoma(sx, sy, pick(ONOMA[settings.lang].drag), 'drag');
+      }
+      if (mouseIsDown) hasDragged = true;
+    }, true);
+
+    // ── mouseup ───────────────────────────────
+    document.addEventListener('mouseup', (e) => {
+      if (hasDragged && settings.trigClick) {
+        spawnOnoma(e.clientX, e.clientY, pick(ONOMA[settings.lang].click), 'click');
+      }
+      mouseIsDown = false;
+      hasDragged  = false;
+    }, true);
+
+    // ── wheel ─────────────────────────────────
+    document.addEventListener('wheel', (e) => {
+      if (!settings.trigWheel) return;
+      const now = Date.now();
+      if (now - wheelThrottle < WHEEL_INTERVAL) return;
+      wheelThrottle = now;
+      const dir  = e.deltaY > 0 ? 'down' : 'up';
+      const list = ONOMA[settings.lang].wheel[dir];
+      const x    = e.clientX + (Math.random() * 60 - 30);
+      const y    = e.clientY + (Math.random() * 60 - 30);
+      spawnOnoma(x, y, pick(list), 'wheel');
+    }, { passive: true, capture: true });
+
+    // ── keydown ───────────────────────────────
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Shift' || e.key === 'Control' || e.key === 'Alt' || e.key === 'Meta') return;
+      if (e.ctrlKey || e.altKey || e.metaKey) return;
+
+      const active = document.activeElement;
+
+      // チェックボックス・ラジオボタンのキーボード操作
+      if (active) {
+        const t = (active.type || '').toLowerCase();
+        const isCheckbox = t === 'checkbox';
+        const isRadio    = t === 'radio';
+        const isArrow    = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key);
+        if ((isCheckbox && e.key === ' ') || (isRadio && (e.key === ' ' || isArrow))) {
+          if (!settings.trigClick) return;
+          const rect = active.getBoundingClientRect();
+          spawnOnoma(
+            rect.left + rect.width  / 2 + (Math.random() * 20 - 10),
+            rect.top  + rect.height / 2,
+            pick(ONOMA[settings.lang].click),
+            'click'
+          );
+          return;
+        }
+      }
+
+      // テキスト入力欄のキーボード操作
+      if (!isTypable(active)) return;
+      const navKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
+                       'Home', 'End', 'PageUp', 'PageDown', 'Tab'];
+      if (navKeys.includes(e.key)) return;
+      if (!settings.trigTyping) return;
+      const now = Date.now();
+      if (now - typeThrottle < TYPE_INTERVAL) return;
+      typeThrottle = now;
+      const coords = getCaretCoords(active);
+      const rect   = active.getBoundingClientRect();
+      const above  = pickAbove(rect.top, rect.bottom);
+      const ty     = above
+        ? rect.top    - 8 - Math.random() * 16
+        : rect.bottom + 8 + Math.random() * 16;
+      const tx     = coords.x + (Math.random() * 40 - 20);
+      spawnOnoma(tx, ty, pick(ONOMA[settings.lang].type), 'type');
+    }, true);
   }
-}, true);
-
-// ── mousemove ─────────────────────────────────
-document.addEventListener('mousemove', (e) => {
-  if (!mouseIsDown || e.buttons === 0) return;
-  const dx   = e.clientX - lastMoveX;
-  const dy   = e.clientY - lastMoveY;
-  const dist = Math.sqrt(dx * dx + dy * dy);
-  const now  = Date.now();
-  if (dist < DRAG_MIN_DIST || now - dragThrottle < DRAG_INTERVAL) return;
-  hasDragged   = true;
-  dragThrottle = now;
-  lastMoveX    = e.clientX;
-  lastMoveY    = e.clientY;
-  if (settings.trigDrag) {
-    spawnOnoma(e.clientX, e.clientY, pick(ONOMA[settings.lang].drag), 'drag');
-  }
-}, true);
-
-// ── selectionchange ───────────────────────────
-document.addEventListener('selectionchange', () => {
-  const sel = window.getSelection();
-  if (!sel || sel.isCollapsed) return;
-  const now = Date.now();
-  if (now - selThrottle < SEL_INTERVAL) return;
-  selThrottle = now;
-  const range = sel.getRangeAt(0);
-  const r     = range.getBoundingClientRect();
-  if (r.width === 0 && r.height === 0) return;
-  if (settings.trigDrag) {
-    const above = pickAbove(r.top, r.bottom);
-    const sy    = above
-      ? r.top    - 8 - Math.random() * 16
-      : r.bottom + 8 + Math.random() * 16;
-    const sx    = r.right + (Math.random() * 20 - 10);
-    spawnOnoma(sx, sy, pick(ONOMA[settings.lang].drag), 'drag');
-  }
-  if (mouseIsDown) hasDragged = true;
-}, true);
-
-// ── mouseup ───────────────────────────────────
-document.addEventListener('mouseup', (e) => {
-  if (hasDragged && settings.trigClick) {
-    spawnOnoma(e.clientX, e.clientY, pick(ONOMA[settings.lang].click), 'click');
-  }
-  mouseIsDown = false;
-  hasDragged  = false;
-}, true);
-
-// ── wheel ─────────────────────────────────────
-document.addEventListener('wheel', (e) => {
-  if (!settings.trigWheel) return;
-  const now = Date.now();
-  if (now - wheelThrottle < WHEEL_INTERVAL) return;
-  wheelThrottle = now;
-  const dir  = e.deltaY > 0 ? 'down' : 'up';
-  const list = ONOMA[settings.lang].wheel[dir];
-  const x    = e.clientX + (Math.random() * 60 - 30);
-  const y    = e.clientY + (Math.random() * 60 - 30);
-  spawnOnoma(x, y, pick(list), 'wheel');
-}, { passive: true, capture: true });
-
-// ── keydown ───────────────────────────────────
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Shift' || e.key === 'Control' || e.key === 'Alt' || e.key === 'Meta') return;
-  if (e.ctrlKey || e.altKey || e.metaKey) return;
-
-  const active = document.activeElement;
-
-  // チェックボックス・ラジオボタンのキーボード操作
-  if (active) {
-    const t = (active.type || '').toLowerCase();
-    const isCheckbox = t === 'checkbox';
-    const isRadio    = t === 'radio';
-    const isArrow    = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key);
-    if ((isCheckbox && e.key === ' ') || (isRadio && (e.key === ' ' || isArrow))) {
-      if (!settings.trigClick) return;
-      const rect = active.getBoundingClientRect();
-      spawnOnoma(
-        rect.left + rect.width  / 2 + (Math.random() * 20 - 10),
-        rect.top  + rect.height / 2,
-        pick(ONOMA[settings.lang].click),
-        'click'
-      );
-      return;
-    }
-  }
-
-  // テキスト入力欄のキーボード操作
-  if (!isTypable(active)) return;
-  const navKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
-                   'Home', 'End', 'PageUp', 'PageDown', 'Tab'];
-  if (navKeys.includes(e.key)) return;
-  if (!settings.trigTyping) return;
-  const now = Date.now();
-  if (now - typeThrottle < TYPE_INTERVAL) return;
-  typeThrottle = now;
-  const coords = getCaretCoords(active);
-  const rect   = active.getBoundingClientRect();
-  const above  = pickAbove(rect.top, rect.bottom);
-  const ty     = above
-    ? rect.top    - 8 - Math.random() * 16
-    : rect.bottom + 8 + Math.random() * 16;
-  const tx     = coords.x + (Math.random() * 40 - 20);
-  spawnOnoma(tx, ty, pick(ONOMA[settings.lang].type), 'type');
-}, true);
+);

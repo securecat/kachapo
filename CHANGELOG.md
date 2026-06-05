@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-06-05
+
+### Added
+- Options page (accessible via chrome://extensions → Details → Extension options) for managing excluded URLs
+- Excluded URLs: pages whose URL starts with a listed prefix are silently skipped by kachapo, regardless of other settings
+- Pre-seeded excluded URL: `https://payment.dmm.com/receipt/issue/`
+
 ## [1.1.1] - 2026-05-28
 
 ### Fixed
@@ -96,6 +103,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に準拠し、
 バージョン管理は [Semantic Versioning](https://semver.org/lang/ja/) に従います。
+
+## [1.2.0] - 2026-06-05
+
+### 追加
+- オプションページを追加（chrome://extensions → 詳細 → 拡張機能のオプション）で除外URLリストを管理できます
+- 除外URL機能：登録したURLで始まるページでは、他の設定に関わらず kachapo が動作しません
+- デフォルト除外URL：`https://payment.dmm.com/receipt/issue/`
 
 ## [1.1.1] - 2026-05-28
 
