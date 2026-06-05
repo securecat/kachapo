@@ -176,6 +176,12 @@
         font-weight: 600;
       }
 
+      .trig-divider {
+        border: none;
+        border-top: 1px solid var(--ui-border);
+        margin: 2px 0 4px;
+      }
+
       @keyframes kp-popup {
         0%   { opacity: 0; transform: scale(0.4) rotate(var(--rot)); }
         15%  { opacity: 1; transform: scale(1.3) rotate(var(--rot)); }
@@ -233,6 +239,17 @@
 
     <fieldset>
       <legend>Triggers</legend>
+      <div class="radio-group">
+        <label class="radio-label">
+          <input type="radio" name="all-trig" value="on">
+          <span class="radio-main">Enabled</span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="all-trig" value="off">
+          <span class="radio-main">Disabled</span>
+        </label>
+      </div>
+      <hr class="trig-divider">
       <div class="check-group">
         <label class="check-label">
           <input type="checkbox" name="trig" value="click">

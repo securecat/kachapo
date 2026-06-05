@@ -106,6 +106,7 @@ const DEFAULT_EXCLUDED_URLS = ['https://payment.dmm.com/receipt/issue/'];
 const settings = {
   lang:       'en',
   color:      'light',
+  allTrigs:   true,
   trigClick:  true,
   trigDrag:   true,
   trigWheel:  true,
@@ -263,13 +264,14 @@ const WHEEL_INTERVAL = 200;
 
 // ── 除外URL確認 + 初期化 ──────────────────────
 chrome.storage.local.get(
-  ['kp-excluded-urls', 'kp-lang', 'kp-color', 'kp-trig-click', 'kp-trig-drag', 'kp-trig-wheel', 'kp-trig-typing'],
+  ['kp-excluded-urls', 'kp-lang', 'kp-color', 'kp-all-trig', 'kp-trig-click', 'kp-trig-drag', 'kp-trig-wheel', 'kp-trig-typing'],
   (result) => {
     const excluded = result['kp-excluded-urls'] ?? DEFAULT_EXCLUDED_URLS;
     if (excluded.some(u => window.location.href.startsWith(u))) return;
 
-    if (result['kp-lang'])  settings.lang  = result['kp-lang'];
-    if (result['kp-color']) settings.color = result['kp-color'];
+    if (result['kp-lang'])     settings.lang     = result['kp-lang'];
+    if (result['kp-color'])    settings.color    = result['kp-color'];
+    if (result['kp-all-trig']) settings.allTrigs = result['kp-all-trig'] === 'on';
     if (result['kp-trig-click']  !== undefined) settings.trigClick  = result['kp-trig-click'];
     if (result['kp-trig-drag']   !== undefined) settings.trigDrag   = result['kp-trig-drag'];
     if (result['kp-trig-wheel']  !== undefined) settings.trigWheel  = result['kp-trig-wheel'];
@@ -278,8 +280,9 @@ chrome.storage.local.get(
     injectStyles();
 
     chrome.storage.onChanged.addListener((changes) => {
-      if (changes['kp-lang'])        settings.lang       = changes['kp-lang'].newValue;
-      if (changes['kp-color'])       settings.color      = changes['kp-color'].newValue;
+      if (changes['kp-lang'])     settings.lang     = changes['kp-lang'].newValue;
+      if (changes['kp-color'])    settings.color    = changes['kp-color'].newValue;
+      if (changes['kp-all-trig']) settings.allTrigs = changes['kp-all-trig'].newValue === 'on';
       if (changes['kp-trig-click'])  settings.trigClick  = changes['kp-trig-click'].newValue;
       if (changes['kp-trig-drag'])   settings.trigDrag   = changes['kp-trig-drag'].newValue;
       if (changes['kp-trig-wheel'])  settings.trigWheel  = changes['kp-trig-wheel'].newValue;
@@ -292,7 +295,7 @@ chrome.storage.local.get(
       hasDragged  = false;
       lastMoveX   = e.clientX;
       lastMoveY   = e.clientY;
-      if (settings.trigClick) {
+      if (settings.allTrigs && settings.trigClick) {
         spawnOnoma(e.clientX, e.clientY, pick(ONOMA[settings.lang].click), 'click');
       }
     }, true);
@@ -309,7 +312,7 @@ chrome.storage.local.get(
       dragThrottle = now;
       lastMoveX    = e.clientX;
       lastMoveY    = e.clientY;
-      if (settings.trigDrag) {
+      if (settings.allTrigs && settings.trigDrag) {
         spawnOnoma(e.clientX, e.clientY, pick(ONOMA[settings.lang].drag), 'drag');
       }
     }, true);
@@ -324,7 +327,7 @@ chrome.storage.local.get(
       const range = sel.getRangeAt(0);
       const r     = range.getBoundingClientRect();
       if (r.width === 0 && r.height === 0) return;
-      if (settings.trigDrag) {
+      if (settings.allTrigs && settings.trigDrag) {
         const above = pickAbove(r.top, r.bottom);
         const sy    = above
           ? r.top    - 8 - Math.random() * 16
@@ -337,7 +340,7 @@ chrome.storage.local.get(
 
     // ── mouseup ───────────────────────────────
     document.addEventListener('mouseup', (e) => {
-      if (hasDragged && settings.trigClick) {
+      if (hasDragged && settings.allTrigs && settings.trigClick) {
         spawnOnoma(e.clientX, e.clientY, pick(ONOMA[settings.lang].click), 'click');
       }
       mouseIsDown = false;
@@ -346,7 +349,7 @@ chrome.storage.local.get(
 
     // ── wheel ─────────────────────────────────
     document.addEventListener('wheel', (e) => {
-      if (!settings.trigWheel) return;
+      if (!settings.allTrigs || !settings.trigWheel) return;
       const now = Date.now();
       if (now - wheelThrottle < WHEEL_INTERVAL) return;
       wheelThrottle = now;
@@ -359,6 +362,7 @@ chrome.storage.local.get(
 
     // ── keydown ───────────────────────────────
     document.addEventListener('keydown', (e) => {
+      if (!settings.allTrigs) return;
       if (e.key === 'Shift' || e.key === 'Control' || e.key === 'Alt' || e.key === 'Meta') return;
       if (e.ctrlKey || e.altKey || e.metaKey) return;
 

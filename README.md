@@ -34,9 +34,8 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## Changelog
 
-### v1.2.0 — 2026-06-05
-- Add: Options page for managing excluded URLs (pages where kachapo does not activate)
-- Add: Pre-seeded excluded URL — `https://payment.dmm.com/receipt/issue/`
+### v1.3.0 — 2026-06-05
+- Add: Triggers Enabled / Disabled master toggle
 
 See [CHANGELOG.md](CHANGELOG.md) for full history.
 
@@ -78,8 +77,7 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## 更新履歴
 
-### v1.2.0 — 2026-06-05
-- 追加：オプションページによる除外URLリスト管理（kachapo が動作しないページを登録できます）
-- 追加：デフォルト除外URL — `https://payment.dmm.com/receipt/issue/`
+### v1.3.0 — 2026-06-05
+- 追加：トリガーの Enabled / Disabled マスタートグル
 
 全履歴は [CHANGELOG.md](CHANGELOG.md) を参照。

@@ -1,10 +1,10 @@
-const RADIO_KEYS     = ['lang', 'color'];
-const RADIO_DEFAULTS = { lang: 'en', color: 'light' };
+const RADIO_KEYS     = ['lang', 'color', 'all-trig'];
+const RADIO_DEFAULTS = { lang: 'en', color: 'light', 'all-trig': 'on' };
 
 const TRIG_KEYS     = ['click', 'drag', 'wheel', 'typing'];
 const TRIG_DEFAULTS = { click: true, drag: true, wheel: true, typing: true };
 
-const current = { lang: 'en', color: 'light' };
+const current = { lang: 'en', color: 'light', 'all-trig': 'on' };
 
 const ONOMA = {
   en: [
