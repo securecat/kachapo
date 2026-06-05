@@ -117,3 +117,9 @@ document.querySelectorAll('input[type=checkbox][name=trig]').forEach(cb => {
     spawnOnoma(current.lang, e.target.closest('label') || e.target);
   });
 });
+
+// ─ Options リンク ────────────────────────────
+document.getElementById('options-link').addEventListener('click', (e) => {
+  e.preventDefault();
+  chrome.runtime.openOptionsPage();
+});

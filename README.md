@@ -34,8 +34,9 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## Changelog
 
-### v1.1.1 — 2026-05-28
-- Fix: onomatopoeia now appears on keyboard operation of checkboxes and radio buttons (Space / arrow keys)
+### v1.2.0 — 2026-06-05
+- Add: Options page for managing excluded URLs (pages where kachapo does not activate)
+- Add: Pre-seeded excluded URL — `https://payment.dmm.com/receipt/issue/`
 
 See [CHANGELOG.md](CHANGELOG.md) for full history.
 
@@ -77,7 +78,8 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## 更新履歴
 
-### v1.1.1 — 2026-05-28
-- チェックボックス・ラジオボタンのキーボード操作（Space・矢印キー）でも擬音語が出るよう修正
+### v1.2.0 — 2026-06-05
+- 追加：オプションページによる除外URLリスト管理（kachapo が動作しないページを登録できます）
+- 追加：デフォルト除外URL — `https://payment.dmm.com/receipt/issue/`
 
 全履歴は [CHANGELOG.md](CHANGELOG.md) を参照。
