@@ -34,8 +34,9 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## Changelog
 
-### v1.3.0 — 2026-06-05
-- Add: Triggers Enabled / Disabled master toggle
+### v1.3.1 — 2026-06-05
+- Fix: popup preview suppressed when Triggers is Disabled
+- Change: Triggers section divider changed to dashed style
 
 See [CHANGELOG.md](CHANGELOG.md) for full history.
 
@@ -77,7 +78,8 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## 更新履歴
 
-### v1.3.0 — 2026-06-05
-- 追加：トリガーの Enabled / Disabled マスタートグル
+### v1.3.1 — 2026-06-05
+- 修正：Triggers が Disabled の時はポップアップ内のプレビュー擬音も非表示に
+- 変更：トリガーセクションの区切り線を破線に変更
 
 全履歴は [CHANGELOG.md](CHANGELOG.md) を参照。

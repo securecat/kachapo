@@ -105,6 +105,7 @@ document.querySelectorAll('input[type=radio]').forEach(radio => {
   radio.addEventListener('change', e => {
     chrome.storage.local.set({ ['kp-' + e.target.name]: e.target.value });
     current[e.target.name] = e.target.value;
+    if (current['all-trig'] !== 'on') return;
     const lang = e.target.name === 'lang' ? e.target.value : current.lang;
     spawnOnoma(lang, e.target.closest('label') || e.target);
   });
@@ -114,6 +115,7 @@ document.querySelectorAll('input[type=radio]').forEach(radio => {
 document.querySelectorAll('input[type=checkbox][name=trig]').forEach(cb => {
   cb.addEventListener('change', e => {
     chrome.storage.local.set({ ['kp-trig-' + e.target.value]: e.target.checked });
+    if (current['all-trig'] !== 'on') return;
     spawnOnoma(current.lang, e.target.closest('label') || e.target);
   });
 });

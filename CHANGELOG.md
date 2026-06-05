@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.1] - 2026-06-05
+
+### Fixed
+- Popup preview animation is now suppressed when Triggers is set to Disabled
+
+### Changed
+- Triggers section divider changed to dashed style
+
 ## [1.3.0] - 2026-06-05
 
 ### Added
@@ -108,6 +116,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に準拠し、
 バージョン管理は [Semantic Versioning](https://semver.org/lang/ja/) に従います。
+
+## [1.3.1] - 2026-06-05
+
+### 修正
+- Triggers が Disabled の時、ポップアップ内のプレビュー擬音も表示されないよう修正
+
+### 変更
+- トリガーセクションの区切り線を破線に変更
 
 ## [1.3.0] - 2026-06-05
 
