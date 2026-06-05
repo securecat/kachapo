@@ -30,6 +30,22 @@
 
       header {
         padding: 12px 14px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+
+      .options-link {
+        font-size: 14px;
+        color: LinkText;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+      .options-link:hover { text-decoration-thickness: 2px; }
+      .options-link:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+        border-radius: 2px;
       }
 
       h1.logo {
@@ -167,32 +183,6 @@
         100% { opacity: 0; transform: scale(0.85) translateY(-22px) rotate(var(--rot)); }
       }
 
-      .footer {
-        padding: 2px 14px 8px;
-      }
-
-      .footer hr {
-        border: none;
-        border-top: 1px solid var(--ui-border);
-        margin: 0 0 8px;
-      }
-
-      .footer a {
-        font-size: 14px;
-        color: var(--muted);
-        text-decoration: underline;
-        text-underline-offset: 2px;
-      }
-      .footer a:hover {
-        color: var(--accent);
-        text-decoration-thickness: 2px;
-      }
-      .footer a:focus-visible {
-        outline: 2px solid var(--accent);
-        outline-offset: 2px;
-        border-radius: 2px;
-      }
-
       @media (prefers-color-scheme: dark) {
         :root {
           --bg:        #18181b;
@@ -210,6 +200,7 @@
 
     <header>
       <h1 class="logo">ka<span>cha</span>po</h1>
+      <a href="#" class="options-link" id="options-link">Options</a>
     </header>
 
     <fieldset>
@@ -261,11 +252,6 @@
         </label>
       </div>
     </fieldset>
-
-    <div class="footer">
-      <hr>
-      <a href="#" id="options-link">Options</a>
-    </div>
 
     <script src="popup.js" defer></script>
   </body>
