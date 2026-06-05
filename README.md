@@ -12,6 +12,8 @@ Your clicks, drag-selections, and keystrokes in input fields are all accompanied
 - Onomatopoeia appears on drag-select (text selection)
 - Onomatopoeia appears on keystroke in input fields
 - Configure language (English / Japanese) and text stroke color (Black / White) from the popup
+- Toggle all triggers on or off at once from the popup — handy for going quiet before a serious screen-sharing session
+- Register excluded URLs to completely suppress kachapo on specific pages, regardless of other settings
 
 ## Notes
 
@@ -56,6 +58,8 @@ See [CHANGELOG.md](CHANGELOG.md) for full history.
 - テキスト選択（ドラッグ）で擬音語が出る
 - 入力欄でのキータイプで擬音語が出る
 - ポップアップから言語（英語・日本語）と縁取り色（黒・白）を設定できる
+- ポップアップから全トリガーを一括で有効 / 無効にできる — 大事な画面共有の前にさっと切れる
+- 除外URLを登録しておくと、そのページでは設定に関わらず擬音語を完全に抑制できる
 
 ## 注意事項
 
