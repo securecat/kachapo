@@ -1,5 +1,5 @@
 const STORAGE_KEY = 'kp-excluded-urls';
-const DEFAULT_EXCLUDED_URLS = ['https://payment.dmm.com/receipt/issue/'];
+const OPTIONS_DEFAULT_URLS = ['https://payment.dmm.com/receipt/issue/'];
 
 let excludedUrls = [];
 
@@ -79,7 +79,7 @@ function add(raw) {
 }
 
 chrome.storage.local.get([STORAGE_KEY], (result) => {
-  excludedUrls = result[STORAGE_KEY] ?? DEFAULT_EXCLUDED_URLS;
+  excludedUrls = result[STORAGE_KEY] ?? OPTIONS_DEFAULT_URLS;
   if (!result[STORAGE_KEY]) save();
   render();
 });

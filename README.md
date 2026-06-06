@@ -36,8 +36,8 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## Changelog
 
-### v1.3.2 — 2026-06-06
-- Add: popup shows wheel onomatopoeia on scroll, with throttle and cursor-position matching real-page behavior
+### v1.3.3 — 2026-06-06
+- Add: kachapo now activates on the Options page, responding to all triggers and respecting popup settings in real time
 
 See [CHANGELOG.md](CHANGELOG.md) for full history.
 
@@ -81,7 +81,7 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## 更新履歴
 
-### v1.3.2 — 2026-06-06
-- 追加：ポップアップ内でスクロールするとホイール擬音語が表示されるよう追加（スロットル・カーソル位置も実ページと同等）
+### v1.3.3 — 2026-06-06
+- 追加：オプションページ上でも kachapo が動作するよう追加。ポップアップの設定にリアルタイム追従
 
 全履歴は [CHANGELOG.md](CHANGELOG.md) を参照。
