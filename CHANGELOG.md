@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-06-06
+
+### Added
+- Excluded URLs now support regular expressions — check "Regex" when adding an entry in Options
+- Pre-seeded second default excluded URL: Peatix payout page (as a regex pattern)
+
 ## [1.3.3] - 2026-06-06
 
 ### Added
@@ -126,6 +132,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に準拠し、
 バージョン管理は [Semantic Versioning](https://semver.org/lang/ja/) に従います。
+
+## [1.4.0] - 2026-06-06
+
+### 追加
+- 除外URLに正規表現を使えるよう対応 — オプションページでエントリ追加時に「Regex」にチェックを入れるだけ
+- デフォルト除外URL に Peatix 支払い明細ページを正規表現パターンで追加
 
 ## [1.3.3] - 2026-06-06
 

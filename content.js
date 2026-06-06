@@ -100,7 +100,10 @@ const ONOMA = {
   },
 };
 
-const DEFAULT_EXCLUDED_URLS = ['https://payment.dmm.com/receipt/issue/'];
+const DEFAULT_EXCLUDED_URLS = [
+  { value: 'https://payment.dmm.com/receipt/issue/', isRegex: false },
+  { value: 'https://peatix\\.com/user/\\d+/payout_details/', isRegex: true },
+];
 
 // ── 設定 ─────────────────────────────────────
 const settings = {
@@ -267,7 +270,13 @@ chrome.storage.local.get(
   ['kp-excluded-urls', 'kp-lang', 'kp-color', 'kp-all-trig', 'kp-trig-click', 'kp-trig-drag', 'kp-trig-wheel', 'kp-trig-typing'],
   (result) => {
     const excluded = result['kp-excluded-urls'] ?? DEFAULT_EXCLUDED_URLS;
-    if (excluded.some(u => window.location.href.startsWith(u))) return;
+    const href = window.location.href;
+    if (excluded.some(e => {
+      if (typeof e === 'string') return href.startsWith(e);
+      try {
+        return e.isRegex ? new RegExp(e.value).test(href) : href.startsWith(e.value);
+      } catch { return false; }
+    })) return;
 
     if (result['kp-lang'])     settings.lang     = result['kp-lang'];
     if (result['kp-color'])    settings.color    = result['kp-color'];

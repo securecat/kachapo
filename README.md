@@ -36,8 +36,8 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## Changelog
 
-### v1.3.3 — 2026-06-06
-- Add: kachapo now activates on the Options page, responding to all triggers and respecting popup settings in real time
+### v1.4.0 — 2026-06-06
+- Add: excluded URLs now support regular expressions (check "Regex" when adding an entry in Options)
 
 See [CHANGELOG.md](CHANGELOG.md) for full history.
 
@@ -81,7 +81,7 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## 更新履歴
 
-### v1.3.3 — 2026-06-06
-- 追加：オプションページ上でも kachapo が動作するよう追加。ポップアップの設定にリアルタイム追従
+### v1.4.0 — 2026-06-06
+- 追加：除外URLで正規表現を使えるよう対応（オプションページで「Regex」にチェックを入れるだけ）
 
 全履歴は [CHANGELOG.md](CHANGELOG.md) を参照。
