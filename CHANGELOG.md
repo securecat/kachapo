@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.1] - 2026-06-07
+
+### Changed
+- Default language now follows Chrome's UI language setting (Japanese if Chrome is set to Japanese, English otherwise)
+
 ## [1.4.0] - 2026-06-06
 
 ### Added
@@ -132,6 +137,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に準拠し、
 バージョン管理は [Semantic Versioning](https://semver.org/lang/ja/) に従います。
+
+## [1.4.1] - 2026-06-07
+
+### 変更
+- デフォルト言語を Chrome の UI 言語設定に連動するよう変更（Chrome が日本語なら Japanese、それ以外は English）
 
 ## [1.4.0] - 2026-06-06
 

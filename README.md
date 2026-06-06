@@ -36,8 +36,8 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## Changelog
 
-### v1.4.0 — 2026-06-06
-- Add: excluded URLs now support regular expressions (check "Regex" when adding an entry in Options)
+### v1.4.1 — 2026-06-07
+- Change: default language now follows Chrome's UI language setting
 
 See [CHANGELOG.md](CHANGELOG.md) for full history.
 
@@ -81,7 +81,7 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## 更新履歴
 
-### v1.4.0 — 2026-06-06
-- 追加：除外URLで正規表現を使えるよう対応（オプションページで「Regex」にチェックを入れるだけ）
+### v1.4.1 — 2026-06-07
+- 変更：デフォルト言語を Chrome の UI 言語設定に連動するよう変更
 
 全履歴は [CHANGELOG.md](CHANGELOG.md) を参照。

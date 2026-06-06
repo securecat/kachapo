@@ -107,7 +107,7 @@ const DEFAULT_EXCLUDED_URLS = [
 
 // ── 設定 ─────────────────────────────────────
 const settings = {
-  lang:       'en',
+  lang:       chrome.i18n.getUILanguage().startsWith('ja') ? 'ja' : 'en',
   color:      'light',
   allTrigs:   true,
   trigClick:  true,

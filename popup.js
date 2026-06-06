@@ -1,10 +1,11 @@
 const RADIO_KEYS     = ['lang', 'color', 'all-trig'];
-const RADIO_DEFAULTS = { lang: 'en', color: 'light', 'all-trig': 'on' };
+const DEFAULT_LANG   = chrome.i18n.getUILanguage().startsWith('ja') ? 'ja' : 'en';
+const RADIO_DEFAULTS = { lang: DEFAULT_LANG, color: 'light', 'all-trig': 'on' };
 
 const TRIG_KEYS     = ['click', 'drag', 'wheel', 'typing'];
 const TRIG_DEFAULTS = { click: true, drag: true, wheel: true, typing: true };
 
-const current = { lang: 'en', color: 'light', 'all-trig': 'on' };
+const current = { lang: DEFAULT_LANG, color: 'light', 'all-trig': 'on' };
 
 const ONOMA = {
   en: {
