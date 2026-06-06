@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.2] - 2026-06-06
+
+### Added
+- Popup now shows wheel onomatopoeia when scrolling inside the popup, matching the throttle and cursor position of real-page behavior
+
 ## [1.3.1] - 2026-06-05
 
 ### Fixed
@@ -116,6 +121,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に準拠し、
 バージョン管理は [Semantic Versioning](https://semver.org/lang/ja/) に従います。
+
+## [1.3.2] - 2026-06-06
+
+### 追加
+- ポップアップ内でスクロールすると、実際のページと同じスロットルとカーソル位置でホイール擬音語が表示されるよう追加
 
 ## [1.3.1] - 2026-06-05
 

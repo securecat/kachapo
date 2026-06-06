@@ -36,9 +36,8 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## Changelog
 
-### v1.3.1 — 2026-06-05
-- Fix: popup preview suppressed when Triggers is Disabled
-- Change: Triggers section divider changed to dashed style
+### v1.3.2 — 2026-06-06
+- Add: popup shows wheel onomatopoeia on scroll, with throttle and cursor-position matching real-page behavior
 
 See [CHANGELOG.md](CHANGELOG.md) for full history.
 
@@ -82,8 +81,7 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## 更新履歴
 
-### v1.3.1 — 2026-06-05
-- 修正：Triggers が Disabled の時はポップアップ内のプレビュー擬音も非表示に
-- 変更：トリガーセクションの区切り線を破線に変更
+### v1.3.2 — 2026-06-06
+- 追加：ポップアップ内でスクロールするとホイール擬音語が表示されるよう追加（スロットル・カーソル位置も実ページと同等）
 
 全履歴は [CHANGELOG.md](CHANGELOG.md) を参照。

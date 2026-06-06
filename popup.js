@@ -7,22 +7,42 @@ const TRIG_DEFAULTS = { click: true, drag: true, wheel: true, typing: true };
 const current = { lang: 'en', color: 'light', 'all-trig': 'on' };
 
 const ONOMA = {
-  en: [
-    { text: 'Click!',  color: '#7C3AED' },
-    { text: 'Snap!',   color: '#D97706' },
-    { text: 'Tap!',    color: '#059669' },
-    { text: 'Pop!',    color: '#DC2626' },
-    { text: 'Tick!',   color: '#2563EB' },
-    { text: 'Clack!',  color: '#DB2777' },
-  ],
-  ja: [
-    { text: 'カチッ', color: '#7C3AED' },
-    { text: 'ポチッ', color: '#D97706' },
-    { text: 'ピッ',   color: '#059669' },
-    { text: 'タッ',   color: '#DC2626' },
-    { text: 'クリッ', color: '#2563EB' },
-    { text: 'ペチッ', color: '#DB2777' },
-  ],
+  en: {
+    click: [
+      { text: 'Click!',  color: '#7C3AED' },
+      { text: 'Snap!',   color: '#D97706' },
+      { text: 'Tap!',    color: '#059669' },
+      { text: 'Pop!',    color: '#DC2626' },
+      { text: 'Tick!',   color: '#2563EB' },
+      { text: 'Clack!',  color: '#DB2777' },
+    ],
+    wheel: [
+      { text: 'Scroll~',  color: '#7C3AED' },
+      { text: 'Whirr~',   color: '#2563EB' },
+      { text: 'Spin~',    color: '#D97706' },
+      { text: 'Roll~',    color: '#059669' },
+      { text: 'Whoosh~',  color: '#DB2777' },
+      { text: 'Swoosh~',  color: '#7C3AED' },
+    ],
+  },
+  ja: {
+    click: [
+      { text: 'カチッ', color: '#7C3AED' },
+      { text: 'ポチッ', color: '#D97706' },
+      { text: 'ピッ',   color: '#059669' },
+      { text: 'タッ',   color: '#DC2626' },
+      { text: 'クリッ', color: '#2563EB' },
+      { text: 'ペチッ', color: '#DB2777' },
+    ],
+    wheel: [
+      { text: 'くるくる', color: '#7C3AED' },
+      { text: 'ごろごろ', color: '#2563EB' },
+      { text: 'するする', color: '#059669' },
+      { text: 'すーっ',   color: '#0891B2' },
+      { text: 'くるっ',   color: '#DC2626' },
+      { text: 'ぬるぬる', color: '#DB2777' },
+    ],
+  },
 };
 
 // ─ ストレージから読み込み ─────────────────────
@@ -68,11 +88,12 @@ function pick(list) {
   return list[Math.floor(Math.random() * list.length)];
 }
 
-function spawnOnoma(lang, targetEl) {
+function spawnOnoma(lang, targetEl, list, coords) {
   const rect    = targetEl.getBoundingClientRect();
-  const x       = rect.left + rect.width / 2 + (Math.random() * 20 - 10);
-  const y       = rect.top + rect.height / 2;
-  const p       = pick(ONOMA[lang] || ONOMA.en);
+  const x       = coords ? coords.x + (Math.random() * 20 - 10) : rect.left + rect.width / 2 + (Math.random() * 20 - 10);
+  const y       = coords ? coords.y : rect.top + rect.height / 2;
+  const words   = list || (ONOMA[lang] || ONOMA.en).click;
+  const p       = pick(words);
   const rot     = (Math.random() * 16 - 8) + 'deg';
   const stroke  = current.color === 'dark' ? '#fff' : '#000';
   const el      = document.createElement('div');
@@ -107,7 +128,7 @@ document.querySelectorAll('input[type=radio]').forEach(radio => {
     current[e.target.name] = e.target.value;
     if (current['all-trig'] !== 'on') return;
     const lang = e.target.name === 'lang' ? e.target.value : current.lang;
-    spawnOnoma(lang, e.target.closest('label') || e.target);
+    spawnOnoma(lang, e.target.closest('label') || e.target, (ONOMA[lang] || ONOMA.en).click);
   });
 });
 
@@ -116,9 +137,21 @@ document.querySelectorAll('input[type=checkbox][name=trig]').forEach(cb => {
   cb.addEventListener('change', e => {
     chrome.storage.local.set({ ['kp-trig-' + e.target.value]: e.target.checked });
     if (current['all-trig'] !== 'on') return;
-    spawnOnoma(current.lang, e.target.closest('label') || e.target);
+    spawnOnoma(current.lang, e.target.closest('label') || e.target, (ONOMA[current.lang] || ONOMA.en).click);
   });
 });
+
+// ─ ホイールプレビュー ────────────────────────
+let wheelThrottle = 0;
+document.addEventListener('wheel', (e) => {
+  if (current['all-trig'] !== 'on') return;
+  const wheelCb = document.querySelector('input[type=checkbox][value="wheel"]');
+  if (!wheelCb?.checked) return;
+  const now = Date.now();
+  if (now - wheelThrottle < 200) return;
+  wheelThrottle = now;
+  spawnOnoma(current.lang, document.body, (ONOMA[current.lang] || ONOMA.en).wheel, { x: e.clientX, y: e.clientY });
+}, { passive: true });
 
 // ─ Options リンク ────────────────────────────
 document.getElementById('options-link').addEventListener('click', (e) => {
