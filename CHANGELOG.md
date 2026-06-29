@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2026-06-30
+
+### Added
+- Double-click: the second mousedown now spawns a larger onomatopoeia (38px vs 26px)
+
+### Fixed
+- Double-clicking no longer erroneously triggers a drag onomatopoeia from the browser's word-selection behavior
+
 ## [1.4.1] - 2026-06-07
 
 ### Changed
@@ -137,6 +145,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に準拠し、
 バージョン管理は [Semantic Versioning](https://semver.org/lang/ja/) に従います。
+
+## [1.5.0] - 2026-06-30
+
+### 追加
+- ダブルクリック：2発目の mousedown でより大きな擬音語（38px）を表示するよう追加
+
+### 修正
+- ダブルクリック時にブラウザの単語選択に起因する不要なドラッグ擬音語が出ていたバグを修正
 
 ## [1.4.1] - 2026-06-07
 

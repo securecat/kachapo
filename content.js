@@ -133,9 +133,9 @@ function pickAbove(rectTop, rectBottom) {
 }
 
 // ── 擬音を画面に出す ──────────────────────────
-function spawnOnoma(x, y, p, kind) {
+function spawnOnoma(x, y, p, kind, sizeOverride) {
   const rot  = (Math.random() * 20 - 10) + 'deg';
-  const size = kind === 'click' ? '26px' : kind === 'drag' ? '18px' : kind === 'wheel' ? '24px' : '22px';
+  const size = sizeOverride || (kind === 'click' ? '26px' : kind === 'drag' ? '18px' : kind === 'wheel' ? '24px' : '22px');
   const anim = kind === 'click' ? 'kp-click 1.1s' : kind === 'drag' ? 'kp-drag 0.9s' : kind === 'wheel' ? 'kp-wheel 1.0s' : 'kp-type 1.0s';
   const dur  = kind === 'click' ? 1150 : kind === 'drag' ? 950 : 1050;
 
@@ -250,14 +250,15 @@ function injectStyles() {
 }
 
 // ── 状態管理 ──────────────────────────────────
-let mouseIsDown   = false;
-let hasDragged    = false;
-let dragThrottle  = 0;
-let selThrottle   = 0;
-let typeThrottle  = 0;
-let wheelThrottle = 0;
-let lastMoveX     = 0;
-let lastMoveY     = 0;
+let mouseIsDown      = false;
+let hasDragged       = false;
+let dragThrottle     = 0;
+let selThrottle      = 0;
+let typeThrottle     = 0;
+let wheelThrottle    = 0;
+let lastMoveX        = 0;
+let lastMoveY        = 0;
+let lastMouseDownTime = 0;
 
 const DRAG_INTERVAL  = 280;
 const DRAG_MIN_DIST  = 12;
@@ -300,12 +301,15 @@ chrome.storage.local.get(
 
     // ── mousedown ─────────────────────────────
     document.addEventListener('mousedown', (e) => {
+      const now   = Date.now();
+      const isDbl = now - lastMouseDownTime < 500;
+      lastMouseDownTime = now;
       mouseIsDown = true;
       hasDragged  = false;
       lastMoveX   = e.clientX;
       lastMoveY   = e.clientY;
       if (settings.allTrigs && settings.trigClick) {
-        spawnOnoma(e.clientX, e.clientY, pick(ONOMA[settings.lang].click), 'click');
+        spawnOnoma(e.clientX, e.clientY, pick(ONOMA[settings.lang].click), 'click', isDbl ? '38px' : null);
       }
     }, true);
 
@@ -330,6 +334,7 @@ chrome.storage.local.get(
     document.addEventListener('selectionchange', () => {
       const sel = window.getSelection();
       if (!sel || sel.isCollapsed) return;
+      if (mouseIsDown && !hasDragged) return;
       const now = Date.now();
       if (now - selThrottle < SEL_INTERVAL) return;
       selThrottle = now;

@@ -36,8 +36,9 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## Changelog
 
-### v1.4.1 — 2026-06-07
-- Change: default language now follows Chrome's UI language setting
+### v1.5.0 — 2026-06-30
+- Add: double-click second mousedown shows a larger onomatopoeia
+- Fix: double-clicking no longer triggers a stray drag onomatopoeia
 
 See [CHANGELOG.md](CHANGELOG.md) for full history.
 
@@ -81,7 +82,8 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## 更新履歴
 
-### v1.4.1 — 2026-06-07
-- 変更：デフォルト言語を Chrome の UI 言語設定に連動するよう変更
+### v1.5.0 — 2026-06-30
+- 追加：ダブルクリックの2発目に大きめの擬音語を表示
+- 修正：ダブルクリック時に不要なドラッグ擬音語が出ていたバグを修正
 
 全履歴は [CHANGELOG.md](CHANGELOG.md) を参照。
