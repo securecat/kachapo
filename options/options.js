@@ -2,6 +2,7 @@ const STORAGE_KEY = 'kp-excluded-urls';
 const OPTIONS_DEFAULT_URLS = [
   { value: 'https://payment.dmm.com/receipt/issue/', isRegex: false },
   { value: 'https://peatix\\.com/user/\\d+/payout_details/', isRegex: true },
+  { value: 'https://clientweb.e-tax.nta.go.jp/', isRegex: false },
 ];
 
 let excludedUrls = [];

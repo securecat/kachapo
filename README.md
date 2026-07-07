@@ -36,9 +36,8 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## Changelog
 
-### v1.5.0 — 2026-06-30
-- Add: double-click second mousedown shows a larger onomatopoeia
-- Fix: double-clicking no longer triggers a stray drag onomatopoeia
+### v1.5.1 — 2026-07-07
+- Add: pre-seeded excluded URL: e-Tax (`https://clientweb.e-tax.nta.go.jp/`)
 
 See [CHANGELOG.md](CHANGELOG.md) for full history.
 
@@ -82,8 +81,7 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## 更新履歴
 
-### v1.5.0 — 2026-06-30
-- 追加：ダブルクリックの2発目に大きめの擬音語を表示
-- 修正：ダブルクリック時に不要なドラッグ擬音語が出ていたバグを修正
+### v1.5.1 — 2026-07-07
+- 追加：デフォルト除外URL に e-Tax を追加
 
 全履歴は [CHANGELOG.md](CHANGELOG.md) を参照。

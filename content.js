@@ -103,6 +103,7 @@ const ONOMA = {
 const DEFAULT_EXCLUDED_URLS = [
   { value: 'https://payment.dmm.com/receipt/issue/', isRegex: false },
   { value: 'https://peatix\\.com/user/\\d+/payout_details/', isRegex: true },
+  { value: 'https://clientweb.e-tax.nta.go.jp/', isRegex: false },
 ];
 
 // ── 設定 ─────────────────────────────────────
