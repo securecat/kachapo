@@ -36,8 +36,10 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## Changelog
 
-### v1.5.1 — 2026-07-07
-- Add: pre-seeded excluded URL: e-Tax (`https://clientweb.e-tax.nta.go.jp/`)
+### v1.5.2 — 2026-07-15
+- Add: "Report it on GitHub Issues" link at the bottom of the Options page
+- Fix: contrast ratio of the "Add" button in dark mode on the Options page
+- Fix: contrast ratio of the "Options" link in dark mode on the popup
 
 See [CHANGELOG.md](CHANGELOG.md) for full history.
 
@@ -81,7 +83,9 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## 更新履歴
 
-### v1.5.1 — 2026-07-07
-- 追加：デフォルト除外URL に e-Tax を追加
+### v1.5.2 — 2026-07-15
+- 追加：オプションページ下部に GitHub Issues へのリンクを追加
+- 修正：オプションページの「Add」ボタンのダークモード時のコントラスト比を改善
+- 修正：ポップアップの「Options」リンクのダークモード時のコントラスト比を改善
 
 全履歴は [CHANGELOG.md](CHANGELOG.md) を参照。

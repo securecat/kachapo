@@ -146,6 +146,10 @@
         border-color: var(--accent);
       }
       .add-btn:hover { background: var(--accent); filter: brightness(1.12); color: #fff; }
+      @media (prefers-color-scheme: dark) {
+        .add-btn { background: var(--accent-l); }
+        .add-btn:hover { background: var(--accent-l); filter: brightness(1.2); }
+      }
 
       .add-form {
         display: flex;
@@ -207,6 +211,30 @@
         flex-shrink: 0;
       }
       .regex-label input[type=checkbox] { cursor: pointer; }
+
+      .divider {
+        border: none;
+        border-top: 1px solid #767676;
+        margin: 0 0 24px;
+      }
+      @media (prefers-color-scheme: dark) {
+        .divider { border-top-color: #eeeeee; }
+      }
+
+      .footer-card {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .footer-card a {
+        color: #0066cc;
+        text-decoration: underline;
+      }
+      .footer-card a:visited { color: #0066cc; }
+      .footer-card a:hover { text-decoration: none; }
+      @media (prefers-color-scheme: dark) {
+        .footer-card a,
+        .footer-card a:visited { color: #4da6ff; }
+      }
     </style>
   </head>
   <body>
@@ -244,6 +272,12 @@
           <button type="submit" class="add-btn">Add</button>
           <p class="url-error" id="url-error" role="alert" aria-live="assertive"></p>
         </form>
+      </div>
+
+      <hr class="divider">
+
+      <div class="card footer-card">
+        Found a bug? <a href="https://github.com/securecat/kachapo/issues" target="_blank" rel="noopener">Report it on GitHub Issues</a>.
       </div>
     </div>
     <script src="options.js" defer></script>

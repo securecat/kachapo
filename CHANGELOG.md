@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.2] - 2026-07-15
+
+### Added
+- "Report it on GitHub Issues" link at the bottom of the Options page
+
+### Fixed
+- Contrast ratio of the "Add" button in dark mode on the Options page
+- Contrast ratio of the "Options" link in dark mode on the popup
+
 ## [1.5.1] - 2026-07-07
 
 ### Added
@@ -150,6 +159,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に準拠し、
 バージョン管理は [Semantic Versioning](https://semver.org/lang/ja/) に従います。
+
+## [1.5.2] - 2026-07-15
+
+### 追加
+- オプションページ下部に GitHub Issues へのリンクを追加
+
+### 修正
+- オプションページの「Add」ボタンのダークモード時のコントラスト比を改善
+- ポップアップの「Options」リンクのダークモード時のコントラスト比を改善
 
 ## [1.5.1] - 2026-07-07
 
