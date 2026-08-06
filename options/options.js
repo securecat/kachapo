@@ -3,6 +3,7 @@ const OPTIONS_DEFAULT_URLS = [
   { value: 'https://payment.dmm.com/receipt/issue/', isRegex: false },
   { value: 'https://peatix\\.com/user/\\d+/payout_details/', isRegex: true },
   { value: 'https://clientweb.e-tax.nta.go.jp/', isRegex: false },
+  { value: 'https://invoice.borndigital.jp/genpdf/', isRegex: false },
 ];
 
 let excludedUrls = [];

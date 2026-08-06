@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.3] - 2026-08-06
+
+### Added
+- Pre-seeded excluded URL: Born Digital invoice PDF page (`https://invoice.borndigital.jp/genpdf/`)
+- Localization support for Chrome Web Store: added `_locales/en/` and `_locales/ja/` with localized extension name and description
+
 ## [1.5.2] - 2026-07-15
 
 ### Added
@@ -159,6 +165,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に準拠し、
 バージョン管理は [Semantic Versioning](https://semver.org/lang/ja/) に従います。
+
+## [1.5.3] - 2026-08-06
+
+### 追加
+- デフォルト除外URL にボーンデジタル請求書PDFページ（`https://invoice.borndigital.jp/genpdf/`）を追加
+- Chrome Web Store 向けロケール対応：`_locales/en/` と `_locales/ja/` を追加し、拡張機能名・説明文を日英で提供
 
 ## [1.5.2] - 2026-07-15
 

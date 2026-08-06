@@ -36,10 +36,9 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## Changelog
 
-### v1.5.2 — 2026-07-15
-- Add: "Report it on GitHub Issues" link at the bottom of the Options page
-- Fix: contrast ratio of the "Add" button in dark mode on the Options page
-- Fix: contrast ratio of the "Options" link in dark mode on the popup
+### v1.5.3 — 2026-08-06
+- Add: pre-seeded excluded URL: Born Digital invoice PDF page
+- Add: localization support for Chrome Web Store (`_locales/en/` and `_locales/ja/`)
 
 See [CHANGELOG.md](CHANGELOG.md) for full history.
 
@@ -83,9 +82,8 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## 更新履歴
 
-### v1.5.2 — 2026-07-15
-- 追加：オプションページ下部に GitHub Issues へのリンクを追加
-- 修正：オプションページの「Add」ボタンのダークモード時のコントラスト比を改善
-- 修正：ポップアップの「Options」リンクのダークモード時のコントラスト比を改善
+### v1.5.3 — 2026-08-06
+- 追加：デフォルト除外URL に Born Digital 請求書PDFページを追加
+- 追加：Chrome Web Store 向けロケール対応（日英）
 
 全履歴は [CHANGELOG.md](CHANGELOG.md) を参照。
