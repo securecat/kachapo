@@ -36,9 +36,8 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## Changelog
 
-### v1.5.3 — 2026-08-06
-- Add: pre-seeded excluded URL: Born Digital invoice PDF page
-- Add: localization support for Chrome Web Store (`_locales/en/` and `_locales/ja/`)
+### v1.5.4 — 2026-08-08
+- Fix: Japanese extension name corrected to "カチャポ" in `_locales/ja/messages.json`
 
 See [CHANGELOG.md](CHANGELOG.md) for full history.
 
@@ -82,8 +81,7 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## 更新履歴
 
-### v1.5.3 — 2026-08-06
-- 追加：デフォルト除外URL に Born Digital 請求書PDFページを追加
-- 追加：Chrome Web Store 向けロケール対応（日英）
+### v1.5.4 — 2026-08-08
+- 修正：`_locales/ja/messages.json` の拡張機能名を「カチャポ」に修正
 
 全履歴は [CHANGELOG.md](CHANGELOG.md) を参照。
