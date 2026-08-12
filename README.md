@@ -36,10 +36,14 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## Changelog
 
-### v1.6.0 — 2026-08-12
-- Add: UI Language setting in Options (English / Japanese, defaults to Chrome's display language)
-- Add: popup and options UI fully localized in English and Japanese
-- Fix: accessibility improvements (contrast ratios, font-family, link hover)
+### [1.6.0] - 2026-08-12
+
+#### Added
+- UI Language setting in Options: choose English or Japanese for the popup and options page UI (defaults to Chrome's display language)
+- Popup and Options UI fully localized in English and Japanese
+
+#### Fixed
+- Accessibility improvements: contrast ratios, font-family, link hover behavior
 
 See [CHANGELOG.md](CHANGELOG.md) for full history.
 
@@ -83,9 +87,13 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## 更新履歴
 
-### v1.6.0 — 2026-08-12
-- 追加：オプションページに UI言語設定を追加（英語・日本語、デフォルトは Chrome の表示言語）
-- 追加：ポップアップとオプションページの UI を日英でローカライズ
-- 修正：各種アクセシビリティ改善（コントラスト、フォント、リンクホバー）
+### [1.6.0] - 2026-08-12
+
+#### 追加
+- オプションページに「UI言語」設定を追加：ポップアップとオプションページの表示言語を英語・日本語から選択できます（デフォルトは Chrome の表示言語に連動）
+- ポップアップとオプションページの UI を日英で完全ローカライズ
+
+#### 修正
+- アクセシビリティ改善：コントラスト比、フォント、リンクのホバー挙動
 
 全履歴は [CHANGELOG.md](CHANGELOG.md) を参照。
