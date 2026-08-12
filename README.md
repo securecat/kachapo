@@ -36,8 +36,10 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## Changelog
 
-### v1.5.4 — 2026-08-08
-- Fix: Japanese extension name corrected to "カチャポ" in `_locales/ja/messages.json`
+### v1.6.0 — 2026-08-12
+- Add: UI Language setting in Options (English / Japanese, defaults to Chrome's display language)
+- Add: popup and options UI fully localized in English and Japanese
+- Fix: accessibility improvements (contrast ratios, font-family, link hover)
 
 See [CHANGELOG.md](CHANGELOG.md) for full history.
 
@@ -81,7 +83,9 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## 更新履歴
 
-### v1.5.4 — 2026-08-08
-- 修正：`_locales/ja/messages.json` の拡張機能名を「カチャポ」に修正
+### v1.6.0 — 2026-08-12
+- 追加：オプションページに UI言語設定を追加（英語・日本語、デフォルトは Chrome の表示言語）
+- 追加：ポップアップとオプションページの UI を日英でローカライズ
+- 修正：各種アクセシビリティ改善（コントラスト、フォント、リンクホバー）
 
 全履歴は [CHANGELOG.md](CHANGELOG.md) を参照。

@@ -15,7 +15,7 @@
         --accent:    #7C3AED;
         --accent-l:  #ede9fe;
         --radius:    8px;
-        --font:      'Hiragino Kaku Gothic Pro', 'Meiryo', 'Noto Sans JP', system-ui, sans-serif;
+        --font:      'Hiragino Kaku Gothic Pro', 'Meiryo', 'Noto Sans JP', sans-serif;
       }
 
       body {
@@ -207,67 +207,67 @@
   <body>
 
     <header>
-      <h1 class="logo">ka<span>cha</span>po</h1>
+      <h1 class="logo" id="logo">ka<span>cha</span>po</h1>
       <a href="#" class="options-link" id="options-link">Options</a>
     </header>
 
     <fieldset>
-      <legend>Language</legend>
+      <legend id="legend-lang">Language</legend>
       <div class="radio-group">
         <label class="radio-label">
           <input type="radio" name="lang" value="en">
-          <span class="radio-main">English</span>
+          <span class="radio-main" id="label-lang-en">English</span>
         </label>
         <label class="radio-label">
           <input type="radio" name="lang" value="ja">
-          <span class="radio-main">Japanese</span>
+          <span class="radio-main" id="label-lang-ja">Japanese</span>
         </label>
       </div>
     </fieldset>
 
     <fieldset>
-      <legend>Text stroke</legend>
+      <legend id="legend-color">Text stroke</legend>
       <div class="radio-group">
         <label class="radio-label">
           <input type="radio" name="color" value="light">
-          <span class="radio-main">Black</span>
+          <span class="radio-main" id="label-color-light">Black</span>
         </label>
         <label class="radio-label">
           <input type="radio" name="color" value="dark">
-          <span class="radio-main">White</span>
+          <span class="radio-main" id="label-color-dark">White</span>
         </label>
       </div>
     </fieldset>
 
     <fieldset>
-      <legend>Triggers</legend>
+      <legend id="legend-trig">Triggers</legend>
       <div class="radio-group">
         <label class="radio-label">
           <input type="radio" name="all-trig" value="on">
-          <span class="radio-main">Enabled</span>
+          <span class="radio-main" id="label-trig-on">Enabled</span>
         </label>
         <label class="radio-label">
           <input type="radio" name="all-trig" value="off">
-          <span class="radio-main">Disabled</span>
+          <span class="radio-main" id="label-trig-off">Disabled</span>
         </label>
       </div>
       <hr class="trig-divider">
       <div class="check-group">
         <label class="check-label">
           <input type="checkbox" name="trig" value="click">
-          <span class="check-main">Click</span>
+          <span class="check-main" id="label-trig-click">Click</span>
         </label>
         <label class="check-label">
           <input type="checkbox" name="trig" value="drag">
-          <span class="check-main">Drag</span>
+          <span class="check-main" id="label-trig-drag">Drag</span>
         </label>
         <label class="check-label">
           <input type="checkbox" name="trig" value="wheel">
-          <span class="check-main">Wheel</span>
+          <span class="check-main" id="label-trig-wheel">Wheel</span>
         </label>
         <label class="check-label">
           <input type="checkbox" name="trig" value="typing">
-          <span class="check-main">Typing</span>
+          <span class="check-main" id="label-trig-typing">Typing</span>
         </label>
       </div>
     </fieldset>

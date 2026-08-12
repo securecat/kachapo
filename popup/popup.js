@@ -7,6 +7,67 @@ const TRIG_DEFAULTS = { click: true, drag: true, wheel: true, typing: true };
 
 const current = { lang: DEFAULT_LANG, color: 'light', 'all-trig': 'on' };
 
+// ─ UI 言語 ───────────────────────────────────
+const UI_LANG_KEY    = 'kp-ui-lang';
+const DEFAULT_UI_LANG = chrome.i18n.getUILanguage().startsWith('ja') ? 'ja' : 'en';
+
+const I18N = {
+  en: {
+    logo:           'ka<span>cha</span>po',
+    options_link:   'Options',
+    lang_legend:    'Language',
+    lang_en:        'English',
+    lang_ja:        'Japanese',
+    color_legend:   'Text stroke',
+    color_light:    'Black',
+    color_dark:     'White',
+    trig_legend:    'Triggers',
+    trig_on:        'Enabled',
+    trig_off:       'Disabled',
+    trig_click:     'Click',
+    trig_drag:      'Drag',
+    trig_wheel:     'Wheel',
+    trig_typing:    'Typing',
+  },
+  ja: {
+    logo:           'カ<span>チャ</span>ポ',
+    options_link:   'オプション',
+    lang_legend:    '擬音語',
+    lang_en:        '英語',
+    lang_ja:        '日本語',
+    color_legend:   '縁取り',
+    color_light:    '黒',
+    color_dark:     '白',
+    trig_legend:    'トリガー',
+    trig_on:        '有効',
+    trig_off:       '無効',
+    trig_click:     'クリック',
+    trig_drag:      'ドラッグ',
+    trig_wheel:     'ホイール',
+    trig_typing:    'タイプ',
+  },
+};
+
+function applyUiLang(lang) {
+  const t = I18N[lang] || I18N.en;
+  document.documentElement.lang                            = lang === 'ja' ? 'ja' : 'en';
+  document.getElementById('logo').innerHTML                = t.logo;
+  document.getElementById('options-link').textContent      = t.options_link;
+  document.getElementById('legend-lang').textContent       = t.lang_legend;
+  document.getElementById('label-lang-en').textContent     = t.lang_en;
+  document.getElementById('label-lang-ja').textContent     = t.lang_ja;
+  document.getElementById('legend-color').textContent      = t.color_legend;
+  document.getElementById('label-color-light').textContent = t.color_light;
+  document.getElementById('label-color-dark').textContent  = t.color_dark;
+  document.getElementById('legend-trig').textContent       = t.trig_legend;
+  document.getElementById('label-trig-on').textContent     = t.trig_on;
+  document.getElementById('label-trig-off').textContent    = t.trig_off;
+  document.getElementById('label-trig-click').textContent  = t.trig_click;
+  document.getElementById('label-trig-drag').textContent   = t.trig_drag;
+  document.getElementById('label-trig-wheel').textContent  = t.trig_wheel;
+  document.getElementById('label-trig-typing').textContent = t.trig_typing;
+}
+
 const ONOMA = {
   en: {
     click: [
@@ -48,11 +109,14 @@ const ONOMA = {
 
 // ─ ストレージから読み込み ─────────────────────
 const allKeys = [
+  UI_LANG_KEY,
   ...RADIO_KEYS.map(k => 'kp-' + k),
   ...TRIG_KEYS.map(k => 'kp-trig-' + k),
 ];
 
 chrome.storage.local.get(allKeys, (result) => {
+  applyUiLang(result[UI_LANG_KEY] ?? DEFAULT_UI_LANG);
+
   const toSave = {};
 
   // ラジオボタン
@@ -84,6 +148,13 @@ chrome.storage.local.get(allKeys, (result) => {
   if (Object.keys(toSave).length) chrome.storage.local.set(toSave);
 });
 
+// ─ UI 言語変更の監視（オプションページから切り替えた場合）──
+chrome.storage.onChanged.addListener((changes) => {
+  if (changes[UI_LANG_KEY]) {
+    applyUiLang(changes[UI_LANG_KEY].newValue);
+  }
+});
+
 // ─ ユーティリティ ────────────────────────────
 function pick(list) {
   return list[Math.floor(Math.random() * list.length)];
@@ -104,7 +175,7 @@ function spawnOnoma(lang, targetEl, list, coords) {
     left: ${x}px;
     top: ${y - 10}px;
     color: ${p.color};
-    font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', 'Noto Sans JP', system-ui, sans-serif;
+    font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', 'Noto Sans JP', sans-serif;
     font-size: 26px;
     font-weight: 700;
     -webkit-text-stroke: 1px ${stroke};

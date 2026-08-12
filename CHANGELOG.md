@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-08-12
+
+### Added
+- UI Language setting in Options: choose English or Japanese for the popup and options page UI (defaults to Chrome's display language)
+- Popup and Options UI fully localized in English and Japanese
+
+### Fixed
+- Removed `system-ui` from all `font-family` declarations
+- Improved contrast ratios for muted text and danger/error text in both light and dark themes (Options page)
+- Fixed footer link underline being removed on hover (Options page)
+
 ## [1.5.4] - 2026-08-08
 
 ### Fixed
@@ -170,6 +181,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に準拠し、
 バージョン管理は [Semantic Versioning](https://semver.org/lang/ja/) に従います。
+
+## [1.6.0] - 2026-08-12
+
+### 追加
+- オプションページに「UI言語」設定を追加：ポップアップとオプションページの表示言語を英語・日本語から選択できます（デフォルトは Chrome の表示言語に連動）
+- ポップアップとオプションページの UI を日英で完全ローカライズ
+
+### 修正
+- すべての `font-family` 宣言から `system-ui` を除去
+- オプションページのミュートテキストおよびエラーテキストのコントラスト比を改善（ライト・ダーク両テーマ）
+- オプションページのフッターリンクのホバー時に下線が消えていた問題を修正
 
 ## [1.5.4] - 2026-08-08
 

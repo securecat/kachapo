@@ -12,13 +12,13 @@
         --surface:   #ffffff;
         --ui-border: #767676;
         --text:      #18181b;
-        --muted:     #71717a;
+        --muted:     #595959;
         --accent:    #7C3AED;
         --accent-l:  #ede9fe;
-        --danger:    #b91c1c;
+        --danger:    #901212;
         --danger-l:  #fee2e2;
         --radius:    8px;
-        --font:      'Hiragino Kaku Gothic Pro', 'Meiryo', 'Noto Sans JP', system-ui, sans-serif;
+        --font:      'Hiragino Kaku Gothic Pro', 'Meiryo', 'Noto Sans JP', sans-serif;
       }
 
       @media (prefers-color-scheme: dark) {
@@ -30,7 +30,7 @@
           --muted:     #a1a1aa;
           --accent:    #a78bfa;
           --accent-l:  #2d1b69;
-          --danger:    #f87171;
+          --danger:    #ffb0b0;
           --danger-l:  #450a0a;
         }
       }
@@ -63,7 +63,7 @@
       .logo span { color: var(--text); }
 
       .subtitle {
-        font-size: 14px;
+        font-size: 16px;
         color: var(--muted);
         margin-top: 2px;
       }
@@ -82,11 +82,64 @@
       }
 
       .card-desc {
-        font-size: 14px;
+        font-size: 16px;
         color: var(--muted);
         margin-bottom: 20px;
       }
 
+      /* ─ UI言語カード用ラジオ ─ */
+      .card fieldset {
+        border: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .radio-group {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+        margin-top: 4px;
+      }
+
+      .radio-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: var(--radius);
+        cursor: pointer;
+        transition: background .12s;
+      }
+      .radio-label:hover { background: var(--accent-l); }
+
+      .radio-label input[type=radio] {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        min-width: 16px;
+        border: 2px solid var(--ui-border);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: border-color .12s, background .12s;
+      }
+      .radio-label input[type=radio]:checked {
+        border-color: var(--accent);
+        background: var(--accent);
+        box-shadow: inset 0 0 0 3px var(--surface);
+      }
+      .radio-label input[type=radio]:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .radio-main { color: var(--text); }
+      .radio-label input:checked ~ .radio-main {
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      /* ─ 除外URLリスト ─ */
       .url-list {
         list-style: none;
         padding: 0;
@@ -106,12 +159,12 @@
 
       .url-text {
         flex: 1;
-        font-size: 14px;
+        font-size: 16px;
         word-break: break-all;
       }
 
       .empty-state {
-        font-size: 14px;
+        font-size: 16px;
         color: var(--muted);
         margin-bottom: 16px;
         padding: 12px;
@@ -120,7 +173,7 @@
 
       button {
         font-family: var(--font);
-        font-size: 14px;
+        font-size: 16px;
         border-radius: var(--radius);
         cursor: pointer;
         transition: background .12s, color .12s, filter .12s;
@@ -174,7 +227,7 @@
         flex: 1;
         min-width: 200px;
         font-family: var(--font);
-        font-size: 14px;
+        font-size: 16px;
         padding: 7px 12px;
         border: 1px solid var(--ui-border);
         border-radius: var(--radius);
@@ -185,13 +238,13 @@
 
       .url-error {
         width: 100%;
-        font-size: 14px;
+        font-size: 16px;
         color: var(--danger);
-        min-height: 20px;
+        min-height: 24px;
       }
 
       .regex-badge {
-        font-size: 11px;
+        font-size: 14px;
         font-weight: 700;
         color: var(--accent);
         border: 1px solid var(--accent);
@@ -205,7 +258,7 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        font-size: 14px;
+        font-size: 16px;
         white-space: nowrap;
         cursor: pointer;
         flex-shrink: 0;
@@ -222,7 +275,7 @@
       }
 
       .footer-card {
-        font-size: 14px;
+        font-size: 16px;
         color: var(--muted);
       }
       .footer-card a {
@@ -230,7 +283,7 @@
         text-decoration: underline;
       }
       .footer-card a:visited { color: #0066cc; }
-      .footer-card a:hover { text-decoration: none; }
+      .footer-card a:hover { text-decoration-thickness: 2px; }
       @media (prefers-color-scheme: dark) {
         .footer-card a,
         .footer-card a:visited { color: #4da6ff; }
@@ -240,13 +293,29 @@
   <body>
     <div class="container">
       <header>
-        <h1 class="logo">ka<span>cha</span>po</h1>
-        <p class="subtitle">Options</p>
+        <h1 class="logo" id="logo">ka<span>cha</span>po</h1>
+        <p class="subtitle" id="subtitle">Options</p>
       </header>
 
       <div class="card">
-        <h2 class="card-title">Excluded URLs</h2>
-        <p class="card-desc">
+        <fieldset>
+          <legend class="card-title" id="opt-ui-lang-title">UI Language</legend>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="ui-lang" value="en">
+              <span class="radio-main" id="label-ui-lang-en">English</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="ui-lang" value="ja">
+              <span class="radio-main" id="label-ui-lang-ja">日本語</span>
+            </label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title" id="opt-excluded-title">Excluded URLs</h2>
+        <p class="card-desc" id="opt-excluded-desc">
           kachapo will not activate on matching pages, regardless of other settings.
           Add a URL prefix for simple matching, or check "Regex" to use a regular expression.
           Reload the tab after making changes.
@@ -256,7 +325,7 @@
         <p class="empty-state" id="empty-state" hidden>No excluded URLs.</p>
 
         <form class="add-form" id="url-form" novalidate>
-          <label for="url-input" class="sr-only">URL prefix or regular expression to exclude</label>
+          <label for="url-input" class="sr-only" id="url-input-label">URL prefix or regular expression to exclude</label>
           <input
             type="text"
             id="url-input"
@@ -267,16 +336,16 @@
           >
           <label class="regex-label">
             <input type="checkbox" id="regex-toggle">
-            Regex
+            <span id="regex-label-text">Regex</span>
           </label>
-          <button type="submit" class="add-btn">Add</button>
+          <button type="submit" class="add-btn" id="add-btn">Add</button>
           <p class="url-error" id="url-error" role="alert" aria-live="assertive"></p>
         </form>
       </div>
 
       <hr class="divider">
 
-      <div class="card footer-card">
+      <div class="card footer-card" id="footer-card">
         Found a bug? <a href="https://github.com/securecat/kachapo/issues" target="_blank" rel="noopener">Report it on GitHub Issues</a>.
       </div>
     </div>
