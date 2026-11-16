@@ -36,14 +36,18 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## Changelog
 
-### [1.6.0] - 2026-08-12
+### [1.7.0] - 2026-11-16
 
 #### Added
-- UI Language setting in Options: choose English or Japanese for the popup and options page UI (defaults to Chrome's display language)
-- Popup and Options UI fully localized in English and Japanese
+- Pressing a button or link with the keyboard (Enter, or also Space for buttons) now shows a click onomatopoeia
+- Onomatopoeia respect the system setting to reduce motion
+
+#### Changed
+- Popup and Options: labels and buttons are underlined on hover instead of changing colors
+- Options: the "regex" badge is shown as "正規表現" in the Japanese UI
 
 #### Fixed
-- Accessibility improvements: contrast ratios, font-family, link hover behavior
+- Accessibility improvements: on-page onomatopoeia hidden from screen readers, contrast ratios, font-family and font size, and when the excluded URL error message clears
 
 See [CHANGELOG.md](CHANGELOG.md) for full history.
 
@@ -87,13 +91,17 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 
 ## 更新履歴
 
-### [1.6.0] - 2026-08-12
+### [1.7.0] - 2026-11-16
 
 #### 追加
-- オプションページに「UI言語」設定を追加：ポップアップとオプションページの表示言語を英語・日本語から選択できます（デフォルトは Chrome の表示言語に連動）
-- ポップアップとオプションページの UI を日英で完全ローカライズ
+- ボタンやリンクをキーボードで押したとき（Enter、ボタンでは Space も）にも、クリックの擬音語が出るように
+- OSの「動きを減らす」設定に対応
+
+#### 変更
+- ポップアップとオプションページで、ホバー時に色を変える代わりに、ラベルやボタンの文字に下線を付けるように
+- オプションページの「regex」バッジを、日本語UIでは「正規表現」と表示するように
 
 #### 修正
-- アクセシビリティ改善：コントラスト比、フォント、リンクのホバー挙動
+- アクセシビリティ改善：ページ上の擬音語をスクリーンリーダーから隠す、コントラスト比、フォントと文字サイズ、除外URLのエラーメッセージが消えるタイミング
 
 全履歴は [CHANGELOG.md](CHANGELOG.md) を参照。

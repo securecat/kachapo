@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2026-11-16
+
+### Added
+- Pressing a button or link with the keyboard (Enter, or also Space for buttons) now shows a click onomatopoeia
+- Onomatopoeia respect the system setting to reduce motion: they fade in and out without growing, shrinking, or moving
+
+### Changed
+- Popup and Options: labels and buttons are now underlined on hover instead of changing colors
+- Options: the "regex" badge in the excluded URL list is shown as "正規表現" in the Japanese UI
+
+### Fixed
+- On-page onomatopoeia are now hidden from screen readers so they don't interrupt reading
+- Improved contrast of accent-colored text and the "Add" button (Popup and Options), and of the "Options" link in dark mode (Popup)
+- Popup and Options now use `sans-serif` only, with a minimum font size of 16px
+- Options: the error message for excluded URLs now also clears when you toggle "Regex", remove an entry, or leave the page
+- Options: removed an invalid `aria-label` from the "regex" badge
+
 ## [1.6.0] - 2026-08-12
 
 ### Added
@@ -181,6 +198,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 形式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に準拠し、
 バージョン管理は [Semantic Versioning](https://semver.org/lang/ja/) に従います。
+
+## [1.7.0] - 2026-11-16
+
+### 追加
+- ボタンやリンクをキーボードで押したとき（Enter、ボタンでは Space も）にも、クリックの擬音語が出るように
+- OSの「動きを減らす」設定に対応：擬音語が拡大・縮小・移動をせず、その場で現れて消えるように
+
+### 変更
+- ポップアップとオプションページで、ホバー時に色を変える代わりに、ラベルやボタンの文字に下線を付けるように
+- オプションページの除外URLリストの「regex」バッジを、日本語UIでは「正規表現」と表示するように
+
+### 修正
+- ページ上の擬音語をスクリーンリーダーから隠し、読み上げの邪魔をしないように
+- アクセント色の文字と「追加」ボタン（ポップアップ・オプションページ）、ダークテーマの「オプション」リンク（ポップアップ）のコントラスト比を改善
+- ポップアップとオプションページのフォントを `sans-serif` のみにし、文字サイズを最小 16px に
+- オプションページの除外URLのエラーメッセージが、「正規表現」の切り替え、エントリの削除、ページから離れたときにも消えるように
+- オプションページの「regex」バッジから、不正な `aria-label` を削除
 
 ## [1.6.0] - 2026-08-12
 
