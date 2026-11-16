@@ -207,6 +207,7 @@ document.getElementById('url-form').addEventListener('submit', (e) => {
 });
 
 document.getElementById('regex-toggle').addEventListener('change', (e) => {
+  clearError();
   document.getElementById('url-input').placeholder = e.target.checked
     ? 'https://example\\.com/user/\\d+/path/'
     : 'https://example.com/path/';
