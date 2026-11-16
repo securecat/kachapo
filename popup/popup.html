@@ -13,6 +13,7 @@
         --text:      #18181b;
         --muted:     #595959;
         --accent:    #5b21b6;
+        --accent-l:  #ede9fe;
         --link-dark: #80bfff;
         --radius:    8px;
         --font:      sans-serif;
@@ -87,7 +88,9 @@
         padding: 4px 6px;
         border-radius: var(--radius);
         cursor: pointer;
+        transition: background .12s;
       }
+      .radio-label:hover { background: var(--accent-l); }
       .radio-label:hover .radio-main { text-decoration: underline; }
 
       .radio-label input[type=radio] {
@@ -132,7 +135,9 @@
         padding: 4px 6px;
         border-radius: var(--radius);
         cursor: pointer;
+        transition: background .12s;
       }
+      .check-label:hover { background: var(--accent-l); }
       .check-label:hover .check-main { text-decoration: underline; }
 
       .check-label input[type=checkbox] {
@@ -203,6 +208,7 @@
           --text:      #fafafa;
           --muted:     #a1a1aa;
           --accent:    #c4b5fd;
+          --accent-l:  #2d1b69;
         }
         .options-link,
         .options-link:visited { color: var(--link-dark); }

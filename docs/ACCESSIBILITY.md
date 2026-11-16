@@ -81,7 +81,7 @@ When you change the UI:
 
 After the change, check that everything can be operated with a keyboard alone, and that a screen reader reads the content correctly.
 
-In the popup and the options page, don't change colors on hover. Underline the text of the button or label instead.
+In the popup and the options page, underline the text of buttons and labels on hover. Don't rely on a color change alone.
 
 When you change the code that shows onomatopoeia (`content.js` and `popup/popup.js`):
 
@@ -183,7 +183,7 @@ UIを変更するときは、次を守ってください。
 
 変更したあとは、キーボードだけですべて操作できること、スクリーンリーダーで内容が正しく読み上げられることを確認してください。
 
-ポップアップとオプションページでは、ホバーしたときに色を変えず、ボタンやラベルの文字に下線を付けてください。
+ポップアップとオプションページでは、ホバーしたときに、ボタンやラベルの文字に下線を付けてください。色の変化だけに頼らないでください。
 
 擬音語を出すコード（`content.js` と `popup/popup.js`）を変更するときは、次を守ってください。
 
