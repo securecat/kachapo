@@ -1,6 +1,6 @@
 # Accessibility
 
-Last updated: 2026-11-15
+Last updated: 2026-11-16
 
 ## Priorities and Goals
 
@@ -20,20 +20,22 @@ Kachapo only watches your interactions and shows onomatopoeia in response.
 - It watches mouse button presses and movement, text selection, the mouse wheel, and key presses. It never cancels or changes your clicks or key presses
 - Onomatopoeia don't respond to clicks, so links and buttons underneath them keep working as usual
 - Onomatopoeia make no sound. Each one appears once per action and disappears after about one second
+- Onomatopoeia are hidden from screen readers (`aria-hidden="true"`), so they don't interrupt what the screen reader is reading
+- If you turn on your system's setting to reduce motion, onomatopoeia don't grow, shrink, or move. They just fade in and out where they appear
 - Typing onomatopoeia only respond to key presses in text fields (`<input>` of type text, search, email, url, password, number, or tel, and `<textarea>`). They ignore cursor movement keys (arrows, Home, End, Page Up, Page Down, and Tab) and combinations with Ctrl, Alt, or Command
-- Operating a checkbox or radio button with the keyboard (Space, or the arrow keys for radio buttons) also shows onomatopoeia
+- Pressing a button or link with the keyboard (Enter, or also Space for buttons), and operating a checkbox or radio button with the keyboard (Space, or also the arrow keys for radio buttons), show onomatopoeia too
 - In the popup, you can turn off all triggers at once, or each trigger (Click, Drag, Wheel, Typing) separately. On pages registered under "Excluded URLs" on the options page, Kachapo does nothing at all
 
 ## Supported Environments
 
 - Browser: Google Chrome (desktop)
 - Operating systems: tested on Windows and macOS
-- Screen readers: we have not yet tested any screen readers, including NVDA on Windows and VoiceOver on macOS
+- Screen readers: we have not yet tested any screen readers, including NVDA on Windows and VoiceOver on macOS (see [Known Limitations](#known-limitations))
 - The popup and the options page can be operated with a keyboard alone
 
 ## Known Limitations
 
-- We are not aware of any limitations at this time.
+- **Kachapo is not designed to be used with a screen reader.** Onomatopoeia that pop up as you move and click the mouse are meant to be enjoyed visually, and having them read aloud would only get in the way of hearing the page. For this reason, we hide onomatopoeia from screen readers so that Kachapo doesn't interfere with what the screen reader reads. As a result, you can't enjoy the onomatopoeia with a screen reader.
 
 ## Reporting Accessibility Barriers
 
@@ -79,7 +81,14 @@ When you change the UI:
 
 After the change, check that everything can be operated with a keyboard alone, and that a screen reader reads the content correctly.
 
-When you change `content.js`, don't cancel or change the page's clicks or key presses (don't call `preventDefault()` or similar), and keep onomatopoeia from blocking clicks (keep `pointer-events: none`).
+In the popup and the options page, don't change colors on hover. Underline the text of the button or label instead.
+
+When you change the code that shows onomatopoeia (`content.js` and `popup/popup.js`):
+
+- Don't cancel or change the page's clicks or key presses (don't call `preventDefault()` or similar)
+- Keep onomatopoeia from blocking clicks (keep `pointer-events: none`)
+- Keep onomatopoeia hidden from screen readers (keep `aria-hidden="true"`)
+- When the user prefers reduced motion (`prefers-reduced-motion: reduce`), don't grow, shrink, or move onomatopoeia
 
 ## Ownership and Maintenance
 
@@ -93,7 +102,7 @@ Suggestions about this statement or our approach to accessibility are also welco
 
 # アクセシビリティ
 
-最終更新：2026-11-15
+最終更新：2026-11-16
 
 ## 優先事項と目標
 
@@ -113,20 +122,22 @@ UIは WCAG 2.2 のレベル AA を目標とし、これを上限ではなく下�
 - 見ているのは、マウスのボタン操作と移動、テキストの選択、マウスホイール、キー入力です。クリックやキー入力を取り消したり、変えたりはしません
 - 擬音語はクリックを受け付けないので、その下にあるリンクやボタンも、ふだんどおり操作できます
 - 擬音語は音を出しません。操作のたびに一度だけ現れ、約1秒で消えます
+- 擬音語は、スクリーンリーダーから隠しています（`aria-hidden="true"`）。スクリーンリーダーの読み上げを邪魔しないためです
+- OSで動きを減らす設定をしていると、擬音語は大きさや位置を変えず、その場で現れて消えます
 - 文字入力の擬音語は、テキストの入力欄（`<input>` の text・search・email・url・password・number・tel と、`<textarea>`）でのキー入力にだけ反応します。カーソルを動かすキー（矢印・Home・End・PageUp・PageDown・Tab）や、Ctrl・Alt・Command との組み合わせには反応しません
-- チェックボックスやラジオボタンをキーボードで操作したとき（Space、ラジオボタンでは矢印キーも）にも、擬音語が出ます
+- ボタンやリンクをキーボードで押したとき（Enter、ボタンでは Space も）や、チェックボックスやラジオボタンをキーボードで操作したとき（Space、ラジオボタンでは矢印キーも）にも、擬音語が出ます
 - ポップアップで、すべてのトリガーをまとめて、またはトリガー（クリック・ドラッグ・ホイール・タイプ）ごとに無効にできます。オプションページの「除外URL」に登録したページでは、カチャポは一切動作しません
 
 ## 対応している環境
 
 - ブラウザ：Google Chrome（デスクトップ版）
 - OS：Windows、macOS で動作を確認済み
-- スクリーンリーダー：Windows の NVDA、macOS の VoiceOver を含め、どのスクリーンリーダーでもまだ試していません
+- スクリーンリーダー：Windows の NVDA、macOS の VoiceOver を含め、どのスクリーンリーダーでもまだ試していません（[既知の制限](#既知の制限)を参照）
 - ポップアップとオプションページは、キーボードだけで操作できます
 
 ## 既知の制限
 
-- 現在、把握している制限はありません。
+- **カチャポは、スクリーンリーダーでの利用を想定していません。** マウスの動きやクリックに合わせて出る擬音語は、目で見て楽しむためのものです。読み上げると、かえってページの内容を聞く邪魔になります。そのため、擬音語はスクリーンリーダーから隠し、読み上げの邪魔をしないように作っています。その代わり、スクリーンリーダーで擬音語を楽しむことはできません。
 
 ## アクセシビリティの問題を報告する
 
@@ -172,7 +183,14 @@ UIを変更するときは、次を守ってください。
 
 変更したあとは、キーボードだけですべて操作できること、スクリーンリーダーで内容が正しく読み上げられることを確認してください。
 
-`content.js` を変更するときは、ページのクリックやキー入力を取り消したり変えたりしないこと（`preventDefault()` などを呼ばない）、擬音語がクリックを妨げないようにすること（`pointer-events: none` を保つ）を守ってください。
+ポップアップとオプションページでは、ホバーしたときに色を変えず、ボタンやラベルの文字に下線を付けてください。
+
+擬音語を出すコード（`content.js` と `popup/popup.js`）を変更するときは、次を守ってください。
+
+- ページのクリックやキー入力を取り消したり、変えたりしない（`preventDefault()` などを呼ばない）
+- 擬音語がクリックを妨げないようにする（`pointer-events: none` を保つ）
+- 擬音語をスクリーンリーダーから隠す（`aria-hidden="true"` を保つ）
+- 動きを減らす設定（`prefers-reduced-motion: reduce`）のときは、擬音語の大きさや位置を変えない
 
 ## 責任者と保守
 
