@@ -168,6 +168,7 @@ function spawnOnoma(lang, targetEl, list, coords) {
   const p       = pick(words);
   const rot     = (Math.random() * 16 - 8) + 'deg';
   const stroke  = current.color === 'dark' ? '#fff' : '#000';
+  const anim    = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'kp-popup-fade' : 'kp-popup';
   const el      = document.createElement('div');
   el.setAttribute('aria-hidden', 'true');
   el.style.cssText = `
@@ -185,7 +186,7 @@ function spawnOnoma(lang, targetEl, list, coords) {
     letter-spacing: 0.03em;
     --rot: ${rot};
     transform: rotate(${rot});
-    animation: kp-popup 1.1s ease-out forwards;
+    animation: ${anim} 1.1s ease-out forwards;
     z-index: 100;
   `;
   el.textContent = p.text;

@@ -127,6 +127,10 @@ function strokeColor() {
   return settings.color === 'dark' ? '#fff' : '#000';
 }
 
+function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
 function pickAbove(rectTop, rectBottom) {
   const canGoAbove = rectTop > 40;
   const canGoBelow = rectBottom < window.innerHeight - 40;
@@ -138,10 +142,14 @@ function pickAbove(rectTop, rectBottom) {
 function spawnOnoma(x, y, p, kind, sizeOverride) {
   const rot  = (Math.random() * 20 - 10) + 'deg';
   const size = sizeOverride || (kind === 'click' ? '26px' : kind === 'drag' ? '18px' : kind === 'wheel' ? '24px' : '22px');
-  const anim = kind === 'click' ? 'kp-click 1.1s' : kind === 'drag' ? 'kp-drag 0.9s' : kind === 'wheel' ? 'kp-wheel 1.0s' : 'kp-type 1.0s';
+  const anim = prefersReducedMotion()
+    ? (kind === 'click' ? 'kp-fade 1.1s' : kind === 'drag' ? 'kp-fade 0.9s' : 'kp-fade 1.0s')
+    : (kind === 'click' ? 'kp-click 1.1s' : kind === 'drag' ? 'kp-drag 0.9s' : kind === 'wheel' ? 'kp-wheel 1.0s' : 'kp-type 1.0s');
   const dur  = kind === 'click' ? 1150 : kind === 'drag' ? 950 : 1050;
 
   const el = document.createElement('div');
+  // スクリーンリーダーでの利用は想定しないが、読み上げの邪魔はしない
+  el.setAttribute('aria-hidden', 'true');
   el.style.cssText = `
     position: fixed;
     left: ${x}px;
@@ -217,6 +225,19 @@ function isTypable(el) {
   return false;
 }
 
+// ── キーボードで押せる要素かどうか（Enter / Space）──
+function isKeyPressable(el, key) {
+  if (!el) return false;
+  const tag  = el.tagName;
+  const role = (el.getAttribute('role') || '').toLowerCase();
+  const isButton = role === 'button' || tag === 'BUTTON' || tag === 'SUMMARY' ||
+    (tag === 'INPUT' && ['button', 'submit', 'reset', 'image'].includes((el.type || '').toLowerCase()));
+  const isLink = !isButton && ((tag === 'A' && el.hasAttribute('href')) || role === 'link');
+  if (isButton) return key === 'Enter' || key === ' ';
+  if (isLink)   return key === 'Enter';
+  return false;
+}
+
 // ── @keyframes 注入 ───────────────────────────
 function injectStyles() {
   if (document.getElementById('kachapo-style')) return;
@@ -246,6 +267,13 @@ function injectStyles() {
       18%  { opacity:1; transform:scale(1.15) rotate(var(--rot)); }
       55%  { opacity:0.85; transform:scale(1.0) rotate(var(--rot)); }
       100% { opacity:0; transform:scale(0.8) translateY(-14px) rotate(var(--rot)); }
+    }
+    /* 動きを減らす設定のとき：拡大・移動をせず、その場で現れて消える */
+    @keyframes kp-fade {
+      0%   { opacity:0; transform:rotate(var(--rot)); }
+      15%  { opacity:1; transform:rotate(var(--rot)); }
+      70%  { opacity:1; transform:rotate(var(--rot)); }
+      100% { opacity:0; transform:rotate(var(--rot)); }
     }
   `;
   document.head.appendChild(s);
@@ -392,6 +420,19 @@ chrome.storage.local.get(
         const isArrow    = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key);
         if ((isCheckbox && e.key === ' ') || (isRadio && (e.key === ' ' || isArrow))) {
           if (!settings.trigClick) return;
+          const rect = active.getBoundingClientRect();
+          spawnOnoma(
+            rect.left + rect.width  / 2 + (Math.random() * 20 - 10),
+            rect.top  + rect.height / 2,
+            pick(ONOMA[settings.lang].click),
+            'click'
+          );
+          return;
+        }
+
+        // ボタン・リンクのキーボード操作
+        if (isKeyPressable(active, e.key)) {
+          if (!settings.trigClick || e.repeat) return;
           const rect = active.getBoundingClientRect();
           spawnOnoma(
             rect.left + rect.width  / 2 + (Math.random() * 20 - 10),

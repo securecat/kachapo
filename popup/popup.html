@@ -12,10 +12,10 @@
         --ui-border: #767676;
         --text:      #18181b;
         --muted:     #595959;
-        --accent:    #7C3AED;
-        --accent-l:  #ede9fe;
+        --accent:    #5b21b6;
+        --link-dark: #80bfff;
         --radius:    8px;
-        --font:      'Hiragino Kaku Gothic Pro', 'Meiryo', 'Noto Sans JP', sans-serif;
+        --font:      sans-serif;
       }
 
       body {
@@ -36,7 +36,7 @@
       }
 
       .options-link {
-        font-size: 14px;
+        font-size: 16px;
         color: LinkText;
         text-decoration: underline;
         text-underline-offset: 2px;
@@ -87,9 +87,8 @@
         padding: 4px 6px;
         border-radius: var(--radius);
         cursor: pointer;
-        transition: background .12s;
       }
-      .radio-label:hover { background: var(--accent-l); }
+      .radio-label:hover .radio-main { text-decoration: underline; }
 
       .radio-label input[type=radio] {
         appearance: none;
@@ -133,9 +132,8 @@
         padding: 4px 6px;
         border-radius: var(--radius);
         cursor: pointer;
-        transition: background .12s;
       }
-      .check-label:hover { background: var(--accent-l); }
+      .check-label:hover .check-main { text-decoration: underline; }
 
       .check-label input[type=checkbox] {
         appearance: none;
@@ -189,6 +187,14 @@
         100% { opacity: 0; transform: scale(0.85) translateY(-22px) rotate(var(--rot)); }
       }
 
+      /* 動きを減らす設定のとき：拡大・移動をせず、その場で現れて消える */
+      @keyframes kp-popup-fade {
+        0%   { opacity: 0; transform: rotate(var(--rot)); }
+        15%  { opacity: 1; transform: rotate(var(--rot)); }
+        70%  { opacity: 1; transform: rotate(var(--rot)); }
+        100% { opacity: 0; transform: rotate(var(--rot)); }
+      }
+
       @media (prefers-color-scheme: dark) {
         :root {
           --bg:        #18181b;
@@ -196,11 +202,10 @@
           --ui-border: #6e6e76;
           --text:      #fafafa;
           --muted:     #a1a1aa;
-          --accent:    #a78bfa;
-          --accent-l:  #2d1b69;
+          --accent:    #c4b5fd;
         }
-        .options-link { color: #4da6ff; }
-        .options-link:visited { color: #4da6ff; }
+        .options-link,
+        .options-link:visited { color: var(--link-dark); }
       }
     </style>
   </head>

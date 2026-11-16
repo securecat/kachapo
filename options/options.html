@@ -13,12 +13,11 @@
         --ui-border: #767676;
         --text:      #18181b;
         --muted:     #595959;
-        --accent:    #7C3AED;
-        --accent-l:  #ede9fe;
+        --accent:    #5b21b6;
+        --accent-bg: #5b21b6;
         --danger:    #901212;
-        --danger-l:  #fee2e2;
         --radius:    8px;
-        --font:      'Hiragino Kaku Gothic Pro', 'Meiryo', 'Noto Sans JP', sans-serif;
+        --font:      sans-serif;
       }
 
       @media (prefers-color-scheme: dark) {
@@ -28,10 +27,9 @@
           --ui-border: #6e6e76;
           --text:      #fafafa;
           --muted:     #a1a1aa;
-          --accent:    #a78bfa;
-          --accent-l:  #2d1b69;
+          --accent:    #c4b5fd;
+          --accent-bg: #2d1b69;
           --danger:    #ffb0b0;
-          --danger-l:  #450a0a;
         }
       }
 
@@ -108,9 +106,8 @@
         padding: 6px 12px;
         border-radius: var(--radius);
         cursor: pointer;
-        transition: background .12s;
       }
-      .radio-label:hover { background: var(--accent-l); }
+      .radio-label:hover .radio-main { text-decoration: underline; }
 
       .radio-label input[type=radio] {
         appearance: none;
@@ -176,13 +173,12 @@
         font-size: 16px;
         border-radius: var(--radius);
         cursor: pointer;
-        transition: background .12s, color .12s, filter .12s;
         border: 1px solid var(--ui-border);
         padding: 6px 14px;
         background: var(--surface);
         color: var(--text);
       }
-      button:hover { background: var(--accent-l); border-color: var(--accent); color: var(--accent); }
+      button:hover { text-decoration: underline; }
       button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
       .remove-btn {
@@ -190,18 +186,12 @@
         color: var(--danger);
         border-color: var(--danger);
       }
-      .remove-btn:hover { background: var(--danger-l); border-color: var(--danger); color: var(--danger); }
 
       .add-btn {
         flex-shrink: 0;
-        background: var(--accent);
+        background: var(--accent-bg);
         color: #fff;
         border-color: var(--accent);
-      }
-      .add-btn:hover { background: var(--accent); filter: brightness(1.12); color: #fff; }
-      @media (prefers-color-scheme: dark) {
-        .add-btn { background: var(--accent-l); }
-        .add-btn:hover { background: var(--accent-l); filter: brightness(1.2); }
       }
 
       .add-form {
@@ -244,7 +234,7 @@
       }
 
       .regex-badge {
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 700;
         color: var(--accent);
         border: 1px solid var(--accent);
@@ -264,6 +254,7 @@
         flex-shrink: 0;
       }
       .regex-label input[type=checkbox] { cursor: pointer; }
+      .regex-label:hover span { text-decoration: underline; }
 
       .divider {
         border: none;
@@ -346,7 +337,7 @@
       <hr class="divider">
 
       <div class="card footer-card" id="footer-card">
-        Found a bug? <a href="https://github.com/securecat/kachapo/issues" target="_blank" rel="noopener">Report it on GitHub Issues</a>.
+        Found a bug? <a href="https://github.com/securecat/kachapo/issues" target="_blank">Report it on GitHub Issues</a>.
       </div>
     </div>
     <script src="options.js" defer></script>

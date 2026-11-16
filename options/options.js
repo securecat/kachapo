@@ -27,10 +27,11 @@ const I18N = {
     empty_state:     'No excluded URLs.',
     url_input_label: 'URL prefix or regular expression to exclude',
     regex_label:     'Regex',
-    add_btn:         'Add',
+    regex_badge:     'regex',
+    add_btn:        'Add',
     remove_btn:      'Remove',
     remove_aria:     (v) => `Remove ${v}`,
-    footer:          'Found a bug? <a href="https://github.com/securecat/kachapo/issues" target="_blank" rel="noopener">Report it on GitHub Issues</a>.',
+    footer:          'Found a bug? <a href="https://github.com/securecat/kachapo/issues" target="_blank">Report it on GitHub Issues</a>.',
     err_empty_regex: 'Please enter a regular expression.',
     err_bad_regex:   'Invalid regular expression.',
     err_url_prefix:  'URL must start with https:// or http://',
@@ -50,10 +51,11 @@ const I18N = {
     empty_state:     '除外URLはありません。',
     url_input_label: '除外するURLプレフィックスまたは正規表現',
     regex_label:     '正規表現',
-    add_btn:         '追加',
+    regex_badge:     '正規表現',
+    add_btn:        '追加',
     remove_btn:      '削除',
     remove_aria:     (v) => `${v} を削除`,
-    footer:          'バグを見つけたら <a href="https://github.com/securecat/kachapo/issues" target="_blank" rel="noopener">GitHub Issues</a> へ。',
+    footer:          'バグを見つけたら <a href="https://github.com/securecat/kachapo/issues" target="_blank">GitHub Issues</a> へ。',
     err_empty_regex: '正規表現を入力してください。',
     err_bad_regex:   '正規表現が不正です。',
     err_url_prefix:  'URLは https:// または http:// で始まる必要があります。',
@@ -103,8 +105,7 @@ function render() {
     if (entry.isRegex) {
       const badge = document.createElement('span');
       badge.className = 'regex-badge';
-      badge.textContent = 'regex';
-      badge.setAttribute('aria-label', 'Regular expression');
+      badge.textContent = t.regex_badge;
       li.append(badge);
     }
 
