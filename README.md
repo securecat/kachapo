@@ -43,7 +43,7 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 - Onomatopoeia respect the system setting to reduce motion
 
 #### Changed
-- Popup and Options: labels and buttons are underlined on hover instead of changing colors
+- Popup and Options: labels and buttons are now also underlined on hover
 - Options: the "regex" badge is shown as "正規表現" in the Japanese UI
 
 #### Fixed
@@ -98,7 +98,7 @@ https://chromewebstore.google.com/detail/kachapo/pnihiolhgllmpalikhngjidaagmkkpp
 - OSの「動きを減らす」設定に対応
 
 #### 変更
-- ポップアップとオプションページで、ホバー時に色を変える代わりに、ラベルやボタンの文字に下線を付けるように
+- ポップアップとオプションページで、ホバー時にラベルやボタンの文字に下線も付けるように
 - オプションページの「regex」バッジを、日本語UIでは「正規表現」と表示するように
 
 #### 修正

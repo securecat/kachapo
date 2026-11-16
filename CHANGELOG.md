@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Onomatopoeia respect the system setting to reduce motion: they fade in and out without growing, shrinking, or moving
 
 ### Changed
-- Popup and Options: labels and buttons are now underlined on hover instead of changing colors
+- Popup and Options: labels and buttons are now also underlined on hover
 - Options: the "regex" badge in the excluded URL list is shown as "正規表現" in the Japanese UI
 
 ### Fixed
@@ -206,7 +206,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - OSの「動きを減らす」設定に対応：擬音語が拡大・縮小・移動をせず、その場で現れて消えるように
 
 ### 変更
-- ポップアップとオプションページで、ホバー時に色を変える代わりに、ラベルやボタンの文字に下線を付けるように
+- ポップアップとオプションページで、ホバー時にラベルやボタンの文字に下線も付けるように
 - オプションページの除外URLリストの「regex」バッジを、日本語UIでは「正規表現」と表示するように
 
 ### 修正
