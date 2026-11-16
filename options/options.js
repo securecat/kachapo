@@ -132,6 +132,7 @@ function remove(entry) {
   excludedUrls = excludedUrls.filter(e => e.value !== entry.value || e.isRegex !== entry.isRegex);
   save();
   render();
+  clearError();
 }
 
 function showError(msg) {
@@ -211,4 +212,6 @@ document.getElementById('regex-toggle').addEventListener('change', (e) => {
     : 'https://example.com/path/';
 });
 
+// エラーメッセージは、ユーザーの注意が別の場所へ移ったときに消す
 document.getElementById('url-input').addEventListener('focus', clearError);
+window.addEventListener('blur', clearError);
