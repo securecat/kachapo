@@ -9,7 +9,7 @@ This statement covers two things:
 - The extension's own UI (the popup and the options page)
 - How Kachapo affects your interactions on the web pages where it runs
 
-For the UI, we target WCAG 2.2 Level AA, and we treat it as a minimum, not a ceiling. Some of our own rules are stricter than AA (see [Contributor Expectations](#contributor-expectations)). We have not had a third-party evaluation, so this is a target, not a claim of conformance.
+For the UI, we target WCAG 2.2 Level AA, and we treat it as a minimum, not a ceiling. Some of our own rules are stricter than AA (see [Contributor Expectations](#contributor-expectations)).
 
 ## Supported Environments
 
@@ -95,7 +95,7 @@ Suggestions about this statement or our approach to accessibility are also welco
 - 拡張機能そのもののUI（ポップアップとオプションページ）
 - カチャポが動作するウェブページで、カチャポが操作に与える影響
 
-UIは WCAG 2.2 のレベル AA を目標とし、これを上限ではなく下限と考えています。AAより厳しい独自の基準もあります（[貢献者への期待](#貢献者への期待)を参照）。第三者による試験は受けていないため、これは目標であり、適合を表明するものではありません。
+UIは WCAG 2.2 のレベル AA を目標とし、これを上限ではなく下限と考えています。AAより厳しい独自の基準もあります（[貢献者への期待](#貢献者への期待)を参照）。
 
 ## 対応している環境
 
